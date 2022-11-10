@@ -1,0 +1,128 @@
+[
+  {
+    "name": "검정 패딩 01",
+    "quantity": 20,
+    "price": 25000,
+    "productCategory": "FASHION"
+  },
+  {
+    "name": "파란 화장품 01",
+    "quantity": 12,
+    "price": 12300,
+    "productCategory": "BEAUTY"
+  },
+  {
+    "name": "빨간 야구공 01",
+    "quantity": 20,
+    "price": 40000,
+    "productCategory": "SPORT"
+  },
+  {
+    "name": "초록 채소 01",
+    "quantity": 20,
+    "price": 123400,
+    "productCategory": "FOOD"
+  },
+  {
+    "name": "황색 티비 01",
+    "quantity": 20,
+    "price": 12300,
+    "productCategory": "DIGITAL"
+  },
+  {
+    "name": "흰색 책 01",
+    "quantity": 20,
+    "price": 12300,
+    "productCategory": "BOOK"
+  },
+  {
+    "name": "회색 티슈 01",
+    "quantity": 20,
+    "price": 142900,
+    "productCategory": "LIFE"
+  },
+  {
+    "name": "검정 패딩 02",
+    "quantity": 20,
+    "price": 25000,
+    "productCategory": "FASHION"
+  },
+  {
+    "name": "파란 화장품 02",
+    "quantity": 12,
+    "price": 12300,
+    "productCategory": "BEAUTY"
+  },
+  {
+    "name": "빨간 야구공 02",
+    "quantity": 20,
+    "price": 40000,
+    "productCategory": "SPORT"
+  },
+  {
+    "name": "초록 채소 02",
+    "quantity": 20,
+    "price": 123400,
+    "productCategory": "FOOD"
+  },
+  {
+    "name": "황색 티비 02",
+    "quantity": 20,
+    "price": 12300,
+    "productCategory": "DIGITAL"
+  },
+  {
+    "name": "흰색 책 02",
+    "quantity": 20,
+    "price": 12300,
+    "productCategory": "BOOK"
+  },
+  {
+    "name": "회색 티슈 02",
+    "quantity": 20,
+    "price": 142900,
+    "productCategory": "LIFE"
+  },
+  {
+    "name": "검정 패딩 03",
+    "quantity": 20,
+    "price": 25000,
+    "productCategory": "FASHION"
+  },
+  {
+    "name": "파란 화장품 03",
+    "quantity": 12,
+    "price": 12300,
+    "productCategory": "BEAUTY"
+  },
+  {
+    "name": "빨간 야구공 03",
+    "quantity": 20,
+    "price": 40000,
+    "productCategory": "SPORT"
+  },
+  {
+    "name": "초록 채소 03",
+    "quantity": 20,
+    "price": 123400,
+    "productCategory": "FOOD"
+  },
+  {
+    "name": "황색 티비 03",
+    "quantity": 20,
+    "price": 12300,
+    "productCategory": "DIGITAL"
+  },
+  {
+    "name": "흰색 책 03",
+    "quantity": 20,
+    "price": 12300,
+    "productCategory": "BOOK"
+  },
+  {
+    "name": "회색 티슈 03",
+    "quantity": 20,
+    "price": 142900,
+    "productCategory": "LIFE"
+  }
+]

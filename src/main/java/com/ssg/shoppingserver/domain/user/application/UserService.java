@@ -1,9 +1,8 @@
 package com.ssg.shoppingserver.domain.user.application;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssg.shoppingserver.domain.user.domain.MembershipLevel;
 import com.ssg.shoppingserver.domain.user.domain.User;
-import com.ssg.shoppingserver.domain.user.dto.UserGetResponse;
+import com.ssg.shoppingserver.domain.user.dto.UserTotalInfoGetResponse;
 import com.ssg.shoppingserver.domain.user.dto.UserSignupEventRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,17 +15,12 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,16 +28,17 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService {
 
+    // user 메모리 보관 queue
     private Queue<User> users = new ConcurrentLinkedQueue<User>();
 
     @PostConstruct
     private void init() throws IOException, ParseException {
-        createMockData();
 
-        log.info(String.valueOf(users.size()));
+        // create mock user data
+        createMockData();
     }
 
-
+    // sign up event creation, user add
     public void signup(UserSignupEventRequest userSignupEventRequest) {
 
         User user = userSignupEventRequest.toEntity();
@@ -52,10 +47,12 @@ public class UserService {
         users.add(user);
     }
 
-    public List<UserGetResponse> getUsers() {
+    // get total users
+    public List<UserTotalInfoGetResponse> getTotalUsers() {
 
-        List<UserGetResponse> userGetResponseList = users.stream()
-                .map(user -> UserGetResponse.builder()
+        // get total users
+        List<UserTotalInfoGetResponse> userTotalInfoGetResponses = users.stream()
+                .map(user -> UserTotalInfoGetResponse.builder()
                         .id(user.getId())
                         .email(user.getEmail())
                         .name(user.getName())
@@ -63,7 +60,7 @@ public class UserService {
                         .isSmileClubMember(user.isSmileClubMember()).build())
                 .collect(Collectors.toList());
 
-        return userGetResponseList;
+        return userTotalInfoGetResponses;
     }
 
     // create mock user data
@@ -83,7 +80,7 @@ public class UserService {
             JSONObject mockUser = (JSONObject) mockUserObjet;
 
             // create mock user entity
-            User build = User.builder()
+            User user = User.builder()
                     .id(UUID.randomUUID())
                     .email((String) mockUser.get("email"))
                     .name((String) mockUser.get("name"))
@@ -91,9 +88,8 @@ public class UserService {
                     .isSmileClubMember( Boolean.parseBoolean((String) mockUser.get("isSmileClubMember"))).build();
 
             // mock user data add
-            users.add(build);
+            users.add(user);
         }
-
 
     }
 

@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-public class UserGetResponse {
+public class UserTotalInfoGetResponse {
 
     // User 고유 id
     private UUID id;
@@ -30,7 +30,7 @@ public class UserGetResponse {
     private boolean isSmileClubMember;
 
     @Builder
-    public UserGetResponse(UUID id, String email, String name, MembershipLevel membershipLevel, boolean isSmileClubMember) {
+    public UserTotalInfoGetResponse(UUID id, String email, String name, MembershipLevel membershipLevel, boolean isSmileClubMember) {
         this.id = id;
         this.email = email;
         this.name = name;

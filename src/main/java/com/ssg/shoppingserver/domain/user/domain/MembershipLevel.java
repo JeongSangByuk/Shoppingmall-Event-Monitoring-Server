@@ -8,13 +8,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum MembershipLevel {
 
-    // SSG.com 회원 등급 체계
+    // SSG.com 회원 등급 체계 => [ VIP, GOLD, FRIENDS ]
 
-    VIP("VIP_MEMBERSHIP", "Vip 회원 등급"),
-    GOLD("GOLD_MEMBERSHIP", "Gold 회원 등급"),
-    FRIENDS("FRIENDS_MEMBERSHIP", "Friends 회원 등급");
+    VIP("VIP_MEMBERSHIP",  10),
+    GOLD("GOLD_MEMBERSHIP",  7),
+    FRIENDS("FRIENDS_MEMBERSHIP",  5);
 
     private final String level;
-    private final String description;
+    private final int discountRate;
 
 }
