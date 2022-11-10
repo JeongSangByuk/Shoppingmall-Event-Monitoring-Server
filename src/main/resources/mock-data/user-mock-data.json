@@ -1,0 +1,32 @@
+[
+  {
+    "email": "test01@ssg.com",
+    "name": "김철수",
+    "membershipLevel": "VIP",
+    "isSmileClubMember": "false"
+  },
+  {
+    "email": "test02@ssg.com",
+    "name": "정짱구",
+    "membershipLevel": "GOLD",
+    "isSmileClubMember": "true"
+  },
+  {
+    "email": "test03@ssg.com",
+    "name": "신맹구",
+    "membershipLevel": "FRIENDS",
+    "isSmileClubMember": "true"
+  },
+  {
+    "email": "test04@ssg.com",
+    "name": "이유리",
+    "membershipLevel": "VIP",
+    "isSmileClubMember": "false"
+  },
+  {
+    "email": "test05@ssg.com",
+    "name": "최형만",
+    "membershipLevel": "FRIENDS",
+    "isSmileClubMember": "true"
+  }
+]
