@@ -4,6 +4,7 @@ import com.ssg.shoppingserver.domain.user.domain.MembershipLevel;
 import com.ssg.shoppingserver.domain.user.domain.User;
 import com.ssg.shoppingserver.domain.user.dto.UserTotalInfoGetResponse;
 import com.ssg.shoppingserver.domain.user.dto.UserSignupEventRequest;
+import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
@@ -82,7 +84,8 @@ public class UserService {
                     .email((String) mockUser.get("email"))
                     .name((String) mockUser.get("name"))
                     .membershipLevel(MembershipLevel.findByCode((Long) mockUser.get("membershipLevel")))
-                    .isSmileClubMember(Boolean.parseBoolean((String) mockUser.get("isSmileClubMember"))).build();
+                    .isSmileClubMember(Boolean.parseBoolean((String) mockUser.get("isSmileClubMember")))
+                    .createdAt(LocalDateTime.parse((String) mockUser.get("createdAt"), BaseLocalDateTimeFormatter.getLocalTimeFormatter())).build();
 
             // mock user data add
             users.add(user);

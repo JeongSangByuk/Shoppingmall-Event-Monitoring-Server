@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -37,6 +38,7 @@ public class UserSignupEventRequest {
                 .name(this.name)
                 .membershipLevel(this.membershipLevel)
                 .isSmileClubMember(this.isSmileClubMember)
+                .createdAt(LocalDateTime.now())
                 .build();
     }
 }

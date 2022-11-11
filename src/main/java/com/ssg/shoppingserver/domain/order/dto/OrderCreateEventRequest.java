@@ -41,6 +41,6 @@ public class OrderCreateEventRequest {
                 .productQuantity(this.productQuantity)
                 .totalPrice(this.totalPrice)
                 .orderState(this.orderState)
-                .createdTime(LocalDateTime.now()).build();
+                .createdAt(LocalDateTime.now()).build();
     }
 }

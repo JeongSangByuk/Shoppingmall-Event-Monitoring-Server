@@ -43,6 +43,6 @@ public class OrderTotalInfoGetResponse {
         this.productQuantity = order.getProductQuantity();
         this.totalPrice = order.getTotalPrice();
         this.orderState = order.getOrderState();
-        this.createdTime = order.getCreatedTime();
+        this.createdTime = order.getCreatedAt();
     }
 }

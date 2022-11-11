@@ -1,5 +1,6 @@
 package com.ssg.shoppingserver.domain.order.domain;
 
+import com.ssg.shoppingserver.global.common.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Order {
+public class Order extends BaseEntity{
 
     // Order 고유 id
     private UUID id;
@@ -30,17 +31,14 @@ public class Order {
     // 주문 현재 상태
     private OrderState orderState;
 
-    // 주문 일시
-    private LocalDateTime createdTime;
-
     @Builder
-    public Order(UUID id, UUID userId, UUID productId, Long productQuantity, Long totalPrice, OrderState orderState, LocalDateTime createdTime) {
+    public Order(UUID id, UUID userId, UUID productId, Long productQuantity, Long totalPrice, OrderState orderState, LocalDateTime createdAt) {
+        super(createdAt);
         this.id = id;
         this.userId = userId;
         this.productId = productId;
         this.productQuantity = productQuantity;
         this.totalPrice = totalPrice;
         this.orderState = orderState;
-        this.createdTime = createdTime;
     }
 }

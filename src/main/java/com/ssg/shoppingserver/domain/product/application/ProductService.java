@@ -4,6 +4,7 @@ import com.ssg.shoppingserver.domain.product.domain.Product;
 import com.ssg.shoppingserver.domain.product.domain.ProductCategory;
 import com.ssg.shoppingserver.domain.product.dto.ProductTotalInfoGetResponse;
 import com.ssg.shoppingserver.domain.user.dto.UserTotalInfoGetResponse;
+import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Queue;
 import java.util.UUID;
@@ -73,12 +75,12 @@ public class ProductService {
                     .name((String) mockProduct.get("name"))
                     .quantity((Long) mockProduct.get("quantity"))
                     .price((Long) mockProduct.get("price"))
-                    .productCategory(ProductCategory.findByCode((Long) mockProduct.get("productCategory"))).build();
+                    .productCategory(ProductCategory.findByCode((Long) mockProduct.get("productCategory")))
+                    .createdAt(LocalDateTime.parse((String) mockProduct.get("createdAt"), BaseLocalDateTimeFormatter.getLocalTimeFormatter())).build();
 
             // mock product data add
             products.add(product);
         }
-
     }
 
 }
