@@ -6,11 +6,13 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product extends BaseEntity {
 
@@ -29,7 +31,7 @@ public class Product extends BaseEntity {
     // Product 카테고리
     private ProductCategory productCategory;
 
-    @Builder
+//    @Builder
     public Product(UUID id, String name, Long quantity, Long price, ProductCategory productCategory, LocalDateTime createdAt) {
         super(createdAt);
         this.id = id;

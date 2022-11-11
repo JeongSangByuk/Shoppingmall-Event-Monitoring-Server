@@ -5,11 +5,13 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseEntity {
 
@@ -28,7 +30,7 @@ public class User extends BaseEntity {
     // User SSG Smile Club 회원 여부
     private boolean isSmileClubMember;
 
-    @Builder
+//    @Builder
     public User(UUID id, String email, String name, MembershipLevel membershipLevel, boolean isSmileClubMember, LocalDateTime createdAt) {
         super(createdAt);
         this.id = id;

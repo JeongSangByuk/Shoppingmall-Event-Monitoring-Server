@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestController()
@@ -28,6 +29,12 @@ public class OrderApi {
     @PostMapping("/order")
     public void createOrder(@RequestBody @Valid OrderCreateEventRequest orderCreateEventRequest) {
         orderService.createOrder(orderCreateEventRequest);
+    }
+
+    // order event deletion api
+    @DeleteMapping("/order/{order-id}")
+    public void cancelOrder(@PathVariable("order-id") String orderId) {
+        orderService.cancelOrder(UUID.fromString(orderId));
     }
 
 

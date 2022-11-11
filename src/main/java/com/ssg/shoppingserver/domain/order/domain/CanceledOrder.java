@@ -1,13 +1,17 @@
 package com.ssg.shoppingserver.domain.order.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
+@SuperBuilder()
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CanceledOrder extends Order {
 
@@ -17,10 +21,18 @@ public class CanceledOrder extends Order {
     이 때, 전반적인 속성이 Order 도메인과 같음으로, Order Entity를 상속받았습니다.
      */
 
+
     // CanceledOrder 이유(고객 취소 이유)
     private OrderCancelReason orderCancelReason;
 
     // 주문 취소 일시
     private LocalDateTime canceledTime;
 
+    @Builder
+    public CanceledOrder(Order order, OrderCancelReason orderCancelReason, LocalDateTime canceledTime) {
+        super(order.getId(), order.getUserId(), order.getProductId(), order.getProductQuantity(), order.getTotalPrice()
+                , order.getOrderState(), order.getCreatedAt());
+        this.orderCancelReason = orderCancelReason;
+        this.canceledTime = canceledTime;
+    }
 }

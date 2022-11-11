@@ -5,11 +5,13 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
+@SuperBuilder()
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order extends BaseEntity{
 
@@ -31,7 +33,7 @@ public class Order extends BaseEntity{
     // 주문 현재 상태
     private OrderState orderState;
 
-    @Builder
+//    @Builder
     public Order(UUID id, UUID userId, UUID productId, Long productQuantity, Long totalPrice, OrderState orderState, LocalDateTime createdAt) {
         super(createdAt);
         this.id = id;
@@ -41,4 +43,5 @@ public class Order extends BaseEntity{
         this.totalPrice = totalPrice;
         this.orderState = orderState;
     }
+
 }

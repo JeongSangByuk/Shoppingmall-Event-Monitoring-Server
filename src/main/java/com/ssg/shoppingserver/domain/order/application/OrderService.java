@@ -2,6 +2,7 @@ package com.ssg.shoppingserver.domain.order.application;
 
 import com.ssg.shoppingserver.domain.order.domain.CanceledOrder;
 import com.ssg.shoppingserver.domain.order.domain.Order;
+import com.ssg.shoppingserver.domain.order.domain.OrderCancelReason;
 import com.ssg.shoppingserver.domain.order.domain.OrderState;
 import com.ssg.shoppingserver.domain.order.dto.OrderCreateEventRequest;
 import com.ssg.shoppingserver.domain.order.dto.OrderTotalInfoGetResponse;
@@ -9,6 +10,7 @@ import com.ssg.shoppingserver.domain.product.domain.Product;
 import com.ssg.shoppingserver.domain.product.domain.ProductCategory;
 import com.ssg.shoppingserver.domain.user.domain.User;
 import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
+import com.sun.jdi.request.InvalidRequestStateException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -58,7 +60,7 @@ public class OrderService {
         orders.add(order);
     }
 
-    //get total orders
+    // get total orders
     public List<OrderTotalInfoGetResponse> getTotalOrders() {
 
         List<OrderTotalInfoGetResponse> orderTotalInfoGetResponses = orders.stream()
@@ -67,6 +69,32 @@ public class OrderService {
                 .collect(Collectors.toList());
 
         return orderTotalInfoGetResponses;
+    }
+
+    // cancel order
+    public void cancelOrder(UUID orderId) {
+
+        // find by
+        Order orderById = orders.stream()
+                .filter(order -> order.getId().equals(orderId))
+                .findFirst().orElseThrow(() -> new IllegalArgumentException());
+
+        // create canceled order
+        CanceledOrder canceledOrder = CanceledOrder.builder()
+                .order(orderById)
+                .orderCancelReason(OrderCancelReason.NOT_IN_STOCK)
+                .canceledTime(LocalDateTime.now())
+                .build();
+
+        // add canceled order
+        canceledOrders.add(canceledOrder);
+
+        // remove order
+        orders.remove(orderById);
+
+        log.info(String.valueOf(orders.size()));
+        log.info(String.valueOf(canceledOrders.size()));
+
     }
 
     // create mock order data
