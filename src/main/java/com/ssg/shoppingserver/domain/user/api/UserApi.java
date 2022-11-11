@@ -18,16 +18,16 @@ public class UserApi {
 
     private final UserService userService;
 
+    // total user list get api
+    @GetMapping("/users")
+    public List<UserTotalInfoGetResponse> getUsers(){
+        return userService.getTotalUsers();
+    }
+
     // user signup event creation api
     @PostMapping("/user/signup")
     public void sigUp(@RequestBody @Valid UserSignupEventRequest userSignupEventRequest){
         userService.signup(userSignupEventRequest);
-    }
-
-    // user list get api
-    @GetMapping("/users")
-    public List<UserTotalInfoGetResponse> getUsers(){
-        return userService.getTotalUsers();
     }
 
 }

@@ -1,128 +1,149 @@
 [
   {
+    "id": "988a7928-16e8-41f1-a197-38c1d7bbb2a1",
     "name": "검정 패딩 01",
     "quantity": 20,
     "price": 25000,
-    "productCategory": "FASHION"
+    "productCategory": 1
   },
   {
+    "id": "8041bbfd-2ebf-4a4e-bedd-157285d1333d",
     "name": "파란 화장품 01",
     "quantity": 12,
     "price": 12300,
-    "productCategory": "BEAUTY"
+    "productCategory": 2
   },
   {
+    "id": "296ce411-c5f3-47de-9224-7be772b1c576",
     "name": "빨간 야구공 01",
     "quantity": 20,
     "price": 40000,
-    "productCategory": "SPORT"
+    "productCategory": 3
   },
   {
+    "id": "1d6ab404-6b5a-4b99-bcea-68d3605fe42d",
     "name": "초록 채소 01",
     "quantity": 20,
     "price": 123400,
-    "productCategory": "FOOD"
+    "productCategory": 4
   },
   {
+    "id": "e6150ec1-343d-41ec-9e91-463d298a606c",
     "name": "황색 티비 01",
     "quantity": 20,
     "price": 12300,
-    "productCategory": "DIGITAL"
+    "productCategory": 5
   },
   {
+    "id": "3f8e2a5f-94ab-4490-a9bc-e43c48d472ea",
     "name": "흰색 책 01",
     "quantity": 20,
     "price": 12300,
-    "productCategory": "BOOK"
+    "productCategory": 6
   },
   {
+    "id": "b53b7fea-a23f-487b-acf8-bf221885963d",
     "name": "회색 티슈 01",
     "quantity": 20,
     "price": 142900,
-    "productCategory": "LIFE"
+    "productCategory": 7
   },
   {
+    "id": "f08f7a26-efad-408a-9d49-6cfa2e03e0e8",
     "name": "검정 패딩 02",
     "quantity": 20,
     "price": 25000,
-    "productCategory": "FASHION"
+    "productCategory": 1
   },
   {
+    "id": "56851a48-f3b0-42b7-b42b-7e7e54b450b2",
     "name": "파란 화장품 02",
     "quantity": 12,
     "price": 12300,
-    "productCategory": "BEAUTY"
+    "productCategory": 2
   },
   {
+    "id": "081374ef-2f3e-4d9f-a62f-81fd1d2548e9",
     "name": "빨간 야구공 02",
     "quantity": 20,
     "price": 40000,
-    "productCategory": "SPORT"
+    "productCategory": 3
   },
   {
+    "id": "2a362212-7a3d-430f-986b-9158e3981527",
     "name": "초록 채소 02",
     "quantity": 20,
     "price": 123400,
-    "productCategory": "FOOD"
+    "productCategory": 4
   },
   {
+    "id": "64ff410e-0b82-4b38-beea-1cddf27c5d0c",
     "name": "황색 티비 02",
     "quantity": 20,
     "price": 12300,
-    "productCategory": "DIGITAL"
+    "productCategory": 5
   },
   {
+    "id": "988a7928-16e8-41f1-a197-38c1d7bbb2a1",
     "name": "흰색 책 02",
     "quantity": 20,
     "price": 12300,
-    "productCategory": "BOOK"
+    "productCategory": 6
   },
   {
+    "id": "043e963e-a281-48db-9f58-ea0cdb115a0c",
     "name": "회색 티슈 02",
     "quantity": 20,
     "price": 142900,
-    "productCategory": "LIFE"
+    "productCategory": 7
   },
   {
+    "id": "988a7928-16e8-41f1-a197-38c1d7bbb2a1",
     "name": "검정 패딩 03",
     "quantity": 20,
     "price": 25000,
-    "productCategory": "FASHION"
+    "productCategory": 1
   },
   {
+    "id": "dae62873-1c51-426e-95d4-ca338eee1a5d",
     "name": "파란 화장품 03",
     "quantity": 12,
     "price": 12300,
-    "productCategory": "BEAUTY"
+    "productCategory": 2
   },
   {
+    "id": "333be73e-eae3-4208-aff0-56013a4addc7",
     "name": "빨간 야구공 03",
     "quantity": 20,
     "price": 40000,
-    "productCategory": "SPORT"
+    "productCategory": 3
   },
   {
+    "id": "2bcc57f1-e23c-43e0-bb5f-687e716cce34",
     "name": "초록 채소 03",
     "quantity": 20,
     "price": 123400,
-    "productCategory": "FOOD"
+    "productCategory": 4
   },
   {
+    "id": "f8e7ab1b-15b4-4765-a76f-42f932ddda5c",
     "name": "황색 티비 03",
     "quantity": 20,
     "price": 12300,
-    "productCategory": "DIGITAL"
+    "productCategory": 5
   },
   {
+    "id": "ecc5ad10-d638-4b2f-97c9-8b3476a35b7c",
     "name": "흰색 책 03",
     "quantity": 20,
     "price": 12300,
-    "productCategory": "BOOK"
+    "productCategory": 6
   },
   {
+    "id": "00b03eb9-0aaa-42bb-8922-ddd306d1eff1",
     "name": "회색 티슈 03",
     "quantity": 20,
     "price": 142900,
-    "productCategory": "LIFE"
+    "productCategory": 7
   }
 ]

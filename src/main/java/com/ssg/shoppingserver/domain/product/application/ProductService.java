@@ -45,11 +45,7 @@ public class ProductService {
         // get total products
         List<ProductTotalInfoGetResponse> productTotalInfoGetResponses = products.stream()
                 .map(product -> ProductTotalInfoGetResponse.builder()
-                        .id(product.getId())
-                        .name(product.getName())
-                        .price(product.getPrice())
-                        .quantity(product.getQuantity())
-                        .productCategory(product.getProductCategory()).build())
+                        .product(product).build())
                 .collect(Collectors.toList());
 
         return productTotalInfoGetResponses;
@@ -73,11 +69,11 @@ public class ProductService {
 
             // create mock product entity
             Product product = Product.builder()
-                    .id(UUID.randomUUID())
+                    .id(UUID.fromString((String) mockProduct.get("id")))
                     .name((String) mockProduct.get("name"))
-                    .quantity(Integer.parseInt(String.valueOf(mockProduct.get("quantity"))))
-                    .price(Integer.parseInt(String.valueOf(mockProduct.get("price"))))
-                    .productCategory(ProductCategory.valueOf((String) mockProduct.get("productCategory"))).build();
+                    .quantity((Long) mockProduct.get("quantity"))
+                    .price((Long) mockProduct.get("price"))
+                    .productCategory(ProductCategory.findByCode((Long) mockProduct.get("productCategory"))).build();
 
             // mock product data add
             products.add(product);

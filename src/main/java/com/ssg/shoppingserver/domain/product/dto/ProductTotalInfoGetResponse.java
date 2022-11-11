@@ -1,5 +1,6 @@
 package com.ssg.shoppingserver.domain.product.dto;
 
+import com.ssg.shoppingserver.domain.product.domain.Product;
 import com.ssg.shoppingserver.domain.product.domain.ProductCategory;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -19,20 +20,20 @@ public class ProductTotalInfoGetResponse {
     private String name;
 
     // Product 수량
-    private int quantity;
+    private Long quantity;
 
     // Product 가격
-    private int price;
+    private Long price;
 
     // Product 카테고리
     private ProductCategory productCategory;
 
     @Builder
-    public ProductTotalInfoGetResponse(UUID id, String name, int quantity, int price, ProductCategory productCategory) {
-        this.id = id;
-        this.name = name;
-        this.quantity = quantity;
-        this.price = price;
-        this.productCategory = productCategory;
+    public ProductTotalInfoGetResponse(Product product) {
+        this.id = product.getId();
+        this.name = product.getName();
+        this.quantity = product.getQuantity();
+        this.price = product.getPrice();
+        this.productCategory = product.getProductCategory();
     }
 }

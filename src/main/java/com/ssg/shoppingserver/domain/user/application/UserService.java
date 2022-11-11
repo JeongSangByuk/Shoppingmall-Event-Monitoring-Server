@@ -41,6 +41,7 @@ public class UserService {
     // sign up event creation, user add
     public void signup(UserSignupEventRequest userSignupEventRequest) {
 
+        // get user entity
         User user = userSignupEventRequest.toEntity();
 
         // user add
@@ -53,11 +54,7 @@ public class UserService {
         // get total users
         List<UserTotalInfoGetResponse> userTotalInfoGetResponses = users.stream()
                 .map(user -> UserTotalInfoGetResponse.builder()
-                        .id(user.getId())
-                        .email(user.getEmail())
-                        .name(user.getName())
-                        .membershipLevel(user.getMembershipLevel())
-                        .isSmileClubMember(user.isSmileClubMember()).build())
+                        .user(user).build())
                 .collect(Collectors.toList());
 
         return userTotalInfoGetResponses;
@@ -81,11 +78,11 @@ public class UserService {
 
             // create mock user entity
             User user = User.builder()
-                    .id(UUID.randomUUID())
+                    .id(UUID.fromString((String) mockUser.get("id")))
                     .email((String) mockUser.get("email"))
                     .name((String) mockUser.get("name"))
-                    .membershipLevel(MembershipLevel.valueOf((String)mockUser.get("membershipLevel")))
-                    .isSmileClubMember( Boolean.parseBoolean((String) mockUser.get("isSmileClubMember"))).build();
+                    .membershipLevel(MembershipLevel.findByCode((Long) mockUser.get("membershipLevel")))
+                    .isSmileClubMember(Boolean.parseBoolean((String) mockUser.get("isSmileClubMember"))).build();
 
             // mock user data add
             users.add(user);

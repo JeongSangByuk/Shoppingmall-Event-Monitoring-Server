@@ -19,16 +19,16 @@ public class Product {
     private String name;
 
     // Product 수량
-    private int quantity;
+    private Long quantity;
 
     // Product 가격
-    private int price;
+    private Long price;
 
     // Product 카테고리
     private ProductCategory productCategory;
 
     @Builder
-    public Product(UUID id, String name, int quantity, int price, ProductCategory productCategory) {
+    public Product(UUID id, String name, Long quantity, Long price, ProductCategory productCategory) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;

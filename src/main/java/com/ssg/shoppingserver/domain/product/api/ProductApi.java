@@ -19,6 +19,7 @@ public class ProductApi {
 
     private final ProductService productService;
 
+    // total product list get api
     @GetMapping("/products")
     public List<ProductTotalInfoGetResponse> getUsers(){
         return productService.getTotalProducts();

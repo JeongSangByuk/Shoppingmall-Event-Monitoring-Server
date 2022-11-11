@@ -30,11 +30,12 @@ public class UserTotalInfoGetResponse {
     private boolean isSmileClubMember;
 
     @Builder
-    public UserTotalInfoGetResponse(UUID id, String email, String name, MembershipLevel membershipLevel, boolean isSmileClubMember) {
-        this.id = id;
-        this.email = email;
-        this.name = name;
-        this.membershipLevel = membershipLevel;
-        this.isSmileClubMember = isSmileClubMember;
+    public UserTotalInfoGetResponse(User user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.name = user.getName();
+        this.membershipLevel = user.getMembershipLevel();
+        this.isSmileClubMember = user.isSmileClubMember();
+
     }
 }
