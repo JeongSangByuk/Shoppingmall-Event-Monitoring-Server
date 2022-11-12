@@ -17,8 +17,10 @@ public enum OrderState {
     DURING_SHIPMENT(4L, "DURING_SHIPMENT", "배송 중"),
     SHIPMENT_COMPLETED(5L, "SHIPMENT_COMPLETED", "배송 완료"),
     PURCHASE_CONFIRMED(6L, "PURCHASE_CONFIRMED","구매 확정"),
-    CANCELED(7L, "CANCELED", "주문 취소"),
-    ERROR(8L, "ERROR", "Request 에러");
+    IN_CART(7L, "IN_CART", "장바구니에 담아진 주문"),
+    REJECTED(8L, "REJECTED", "주문 실패/거부"),
+    CANCELED(9L, "CANCELED", "주문 취소"),
+    ERROR(10L, "ERROR", "Request 에러");
 
     private final Long code;
     private final String title;
