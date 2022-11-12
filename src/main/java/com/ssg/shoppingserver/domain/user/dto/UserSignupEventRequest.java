@@ -24,7 +24,7 @@ public class UserSignupEventRequest {
 
     // User 멤버십 레벨
     @NotNull
-    private MembershipLevel membershipLevel;
+    private Long membershipLevelCode;
 
     // User SSG Smile Club 회원 여부
     @NotNull
@@ -36,7 +36,7 @@ public class UserSignupEventRequest {
                 .id(UUID.randomUUID())
                 .email(this.email)
                 .name(this.name)
-                .membershipLevel(this.membershipLevel)
+                .membershipLevel(MembershipLevel.findByCode(this.membershipLevelCode))
                 .isSmileClubMember(this.isSmileClubMember)
                 .createdAt(LocalDateTime.now())
                 .build();

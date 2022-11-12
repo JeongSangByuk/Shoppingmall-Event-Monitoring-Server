@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
-@SuperBuilder()
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order extends BaseEntity{
 
@@ -33,7 +33,6 @@ public class Order extends BaseEntity{
     // 주문 현재 상태
     private OrderState orderState;
 
-//    @Builder
     public Order(UUID id, UUID userId, UUID productId, Long productQuantity, Long totalPrice, OrderState orderState, LocalDateTime createdAt) {
         super(createdAt);
         this.id = id;

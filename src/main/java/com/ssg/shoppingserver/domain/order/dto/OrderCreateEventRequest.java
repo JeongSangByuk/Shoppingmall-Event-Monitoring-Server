@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -14,23 +16,25 @@ import java.util.UUID;
 @NoArgsConstructor
 public class OrderCreateEventRequest {
 
+    @NotNull
     // 구매자 고유 id
     private UUID userId;
 
+    @NotNull
     // 구매 상품 고유 id
     private UUID productId;
 
+    @NotNull
     // 상품 구매 수
     private Long productQuantity;
 
+    @NotNull
     // 전체 결제 가격
     private Long totalPrice;
 
+    @NotNull
     // 주문 현재 상태
-    private OrderState orderState;
-
-    // 주문 일시
-    private LocalDateTime createdTime;
+    private Long orderStateCode;
 
     // dto to entity
     public Order toEntity() {
@@ -40,7 +44,7 @@ public class OrderCreateEventRequest {
                 .productId(this.productId)
                 .productQuantity(this.productQuantity)
                 .totalPrice(this.totalPrice)
-                .orderState(this.orderState)
+                .orderState(OrderState.findByCode(this.orderStateCode))
                 .createdAt(LocalDateTime.now()).build();
     }
 }

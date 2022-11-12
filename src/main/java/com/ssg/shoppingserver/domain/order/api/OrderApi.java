@@ -1,6 +1,8 @@
 package com.ssg.shoppingserver.domain.order.api;
 
 import com.ssg.shoppingserver.domain.order.application.OrderService;
+import com.ssg.shoppingserver.domain.order.dto.CanceledOrderTotalInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.dto.OrderCancelEventRequest;
 import com.ssg.shoppingserver.domain.order.dto.OrderCreateEventRequest;
 import com.ssg.shoppingserver.domain.order.dto.OrderTotalInfoGetResponse;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,12 @@ public class OrderApi {
         return orderService.getTotalOrders();
     }
 
+    // canceled total order list get api
+    @GetMapping("/canceled-orders")
+    public List<CanceledOrderTotalInfoGetResponse> getCanceledOrders() {
+        return orderService.getTotalCanceledOrders();
+    }
+
     // order event creation api
     @PostMapping("/order")
     public void createOrder(@RequestBody @Valid OrderCreateEventRequest orderCreateEventRequest) {
@@ -32,9 +40,9 @@ public class OrderApi {
     }
 
     // order event deletion api
-    @DeleteMapping("/order/{order-id}")
-    public void cancelOrder(@PathVariable("order-id") String orderId) {
-        orderService.cancelOrder(UUID.fromString(orderId));
+    @DeleteMapping("/order")
+    public void cancelOrder(@RequestBody @Valid OrderCancelEventRequest orderCancelEventRequest) {
+        orderService.cancelOrder(orderCancelEventRequest);
     }
 
 
