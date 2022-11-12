@@ -36,7 +36,7 @@
     "email": "test05@ssg.com",
     "name": "최형만",
     "membershipLevel": 2,
-    "isSmileClubMember": "true",
+    "isSmileClubMember": "false",
     "createdAt": "2022-11-11 18:05:57"
   }
 ]

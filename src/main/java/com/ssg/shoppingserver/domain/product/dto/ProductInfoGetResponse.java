@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-public class ProductTotalInfoGetResponse {
+public class ProductInfoGetResponse {
 
     // Product 고유 id
     private UUID id;
@@ -33,7 +33,7 @@ public class ProductTotalInfoGetResponse {
     private String createdAt;
 
     @Builder
-    public ProductTotalInfoGetResponse(Product product) {
+    public ProductInfoGetResponse(Product product) {
         this.id = product.getId();
         this.name = product.getName();
         this.quantity = product.getQuantity();

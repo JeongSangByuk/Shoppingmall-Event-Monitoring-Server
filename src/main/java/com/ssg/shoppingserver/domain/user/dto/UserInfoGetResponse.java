@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-public class UserTotalInfoGetResponse {
+public class UserInfoGetResponse {
 
     // User 고유 id
     private UUID id;
@@ -37,7 +37,7 @@ public class UserTotalInfoGetResponse {
     private String createdAt;
 
     @Builder
-    public UserTotalInfoGetResponse(User user) {
+    public UserInfoGetResponse(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
         this.name = user.getName();

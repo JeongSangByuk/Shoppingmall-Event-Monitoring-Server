@@ -16,7 +16,7 @@ public class test1 {
     void test() {
         Logger log = (Logger) LoggerFactory.getLogger(test1.class);
 
-        for(int i = 0; i < 100; i ++)
+        for(int i = 0; i < 30; i ++)
             log.info(UUID.randomUUID().toString());
     }
 

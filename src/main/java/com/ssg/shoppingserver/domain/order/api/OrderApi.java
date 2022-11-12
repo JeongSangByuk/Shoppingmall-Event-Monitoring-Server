@@ -1,17 +1,16 @@
 package com.ssg.shoppingserver.domain.order.api;
 
 import com.ssg.shoppingserver.domain.order.application.OrderService;
-import com.ssg.shoppingserver.domain.order.dto.CanceledOrderTotalInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.dto.CanceledOrderInfoGetResponse;
 import com.ssg.shoppingserver.domain.order.dto.OrderCancelEventRequest;
 import com.ssg.shoppingserver.domain.order.dto.OrderCreateEventRequest;
-import com.ssg.shoppingserver.domain.order.dto.OrderTotalInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.dto.OrderInfoGetResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 @RestController()
@@ -23,13 +22,13 @@ public class OrderApi {
 
     // total order list get api
     @GetMapping("/orders")
-    public List<OrderTotalInfoGetResponse> getOrders() {
+    public List<OrderInfoGetResponse> getOrders() {
         return orderService.getTotalOrders();
     }
 
     // canceled total order list get api
     @GetMapping("/canceled-orders")
-    public List<CanceledOrderTotalInfoGetResponse> getCanceledOrders() {
+    public List<CanceledOrderInfoGetResponse> getCanceledOrders() {
         return orderService.getTotalCanceledOrders();
     }
 

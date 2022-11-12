@@ -2,8 +2,7 @@ package com.ssg.shoppingserver.domain.product.application;
 
 import com.ssg.shoppingserver.domain.product.domain.Product;
 import com.ssg.shoppingserver.domain.product.domain.ProductCategory;
-import com.ssg.shoppingserver.domain.product.dto.ProductTotalInfoGetResponse;
-import com.ssg.shoppingserver.domain.user.dto.UserTotalInfoGetResponse;
+import com.ssg.shoppingserver.domain.product.dto.ProductInfoGetResponse;
 import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,15 +41,15 @@ public class ProductService {
     }
 
     // get total products
-    public List<ProductTotalInfoGetResponse> getTotalProducts() {
+    public List<ProductInfoGetResponse> getTotalProducts() {
 
         // get total products
-        List<ProductTotalInfoGetResponse> productTotalInfoGetResponses = products.stream()
-                .map(product -> ProductTotalInfoGetResponse.builder()
+        List<ProductInfoGetResponse> productInfoGetRespons = products.stream()
+                .map(product -> ProductInfoGetResponse.builder()
                         .product(product).build())
                 .collect(Collectors.toList());
 
-        return productTotalInfoGetResponses;
+        return productInfoGetRespons;
     }
 
     // create mock product data

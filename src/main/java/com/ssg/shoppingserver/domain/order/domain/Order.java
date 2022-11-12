@@ -33,6 +33,7 @@ public class Order extends BaseEntity{
     // 주문 현재 상태
     private OrderState orderState;
 
+    // 주문 실패/거부 시 사유.
     private OrderRejectionReason orderRejectionReason;
 
     public Order(UUID id, UUID userId, UUID productId, Long productQuantity, Long totalPrice, OrderState orderState, LocalDateTime createdAt) {

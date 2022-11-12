@@ -1,8 +1,7 @@
 package com.ssg.shoppingserver.domain.product.api;
 
 import com.ssg.shoppingserver.domain.product.application.ProductService;
-import com.ssg.shoppingserver.domain.product.dto.ProductTotalInfoGetResponse;
-import com.ssg.shoppingserver.domain.user.dto.UserTotalInfoGetResponse;
+import com.ssg.shoppingserver.domain.product.dto.ProductInfoGetResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +20,7 @@ public class ProductApi {
 
     // total product list get api
     @GetMapping("/products")
-    public List<ProductTotalInfoGetResponse> getUsers(){
+    public List<ProductInfoGetResponse> getUsers(){
         return productService.getTotalProducts();
     }
 

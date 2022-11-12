@@ -1,7 +1,7 @@
 package com.ssg.shoppingserver.domain.user.api;
 
 import com.ssg.shoppingserver.domain.user.application.UserService;
-import com.ssg.shoppingserver.domain.user.dto.UserTotalInfoGetResponse;
+import com.ssg.shoppingserver.domain.user.dto.UserInfoGetResponse;
 import com.ssg.shoppingserver.domain.user.dto.UserSignupEventRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ public class UserApi {
 
     // total user list get api
     @GetMapping("/users")
-    public List<UserTotalInfoGetResponse> getUsers(){
+    public List<UserInfoGetResponse> getUsers(){
         return userService.getTotalUsers();
     }
 

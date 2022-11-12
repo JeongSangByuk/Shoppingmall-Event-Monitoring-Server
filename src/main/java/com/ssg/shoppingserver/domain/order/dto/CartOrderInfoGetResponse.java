@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-public class CartOrderTotalInfoGetResponse {
+public class CartOrderInfoGetResponse {
 
     // Cart-Order 고유 id
     private UUID id;
@@ -36,7 +36,7 @@ public class CartOrderTotalInfoGetResponse {
     private LocalDateTime createdTime;
 
     @Builder
-    public CartOrderTotalInfoGetResponse(CartOrder cartOrder) {
+    public CartOrderInfoGetResponse(CartOrder cartOrder) {
         this.id = cartOrder.getId();
         this.userId = cartOrder.getUserId();
         this.productId = cartOrder.getProductId();

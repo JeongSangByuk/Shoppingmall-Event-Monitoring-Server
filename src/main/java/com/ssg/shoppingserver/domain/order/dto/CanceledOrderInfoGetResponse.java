@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-public class CanceledOrderTotalInfoGetResponse {
+public class CanceledOrderInfoGetResponse {
 
     // Order 고유 id
     private UUID id;
@@ -43,7 +43,7 @@ public class CanceledOrderTotalInfoGetResponse {
     private LocalDateTime canceledTime;
 
     @Builder
-    public CanceledOrderTotalInfoGetResponse(CanceledOrder canceledOrder) {
+    public CanceledOrderInfoGetResponse(CanceledOrder canceledOrder) {
         this.id = canceledOrder.getId();
         this.userId = canceledOrder.getUserId();
         this.productId = canceledOrder.getProductId();

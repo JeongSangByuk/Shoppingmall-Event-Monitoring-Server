@@ -4,15 +4,12 @@ import com.ssg.shoppingserver.domain.order.domain.CanceledOrder;
 import com.ssg.shoppingserver.domain.order.domain.Order;
 import com.ssg.shoppingserver.domain.order.domain.OrderCancelReason;
 import com.ssg.shoppingserver.domain.order.domain.OrderState;
-import com.ssg.shoppingserver.domain.order.dto.CanceledOrderTotalInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.dto.CanceledOrderInfoGetResponse;
 import com.ssg.shoppingserver.domain.order.dto.OrderCancelEventRequest;
 import com.ssg.shoppingserver.domain.order.dto.OrderCreateEventRequest;
-import com.ssg.shoppingserver.domain.order.dto.OrderTotalInfoGetResponse;
-import com.ssg.shoppingserver.domain.product.domain.Product;
-import com.ssg.shoppingserver.domain.product.domain.ProductCategory;
-import com.ssg.shoppingserver.domain.user.domain.User;
+import com.ssg.shoppingserver.domain.order.dto.OrderInfoGetResponse;
 import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
-import com.sun.jdi.request.InvalidRequestStateException;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -39,6 +36,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderService {
 
+    @Getter
     // Order 메모리 보관 queue
     private Queue<Order> orders = new ConcurrentLinkedQueue<Order>();
 
@@ -63,25 +61,25 @@ public class OrderService {
     }
 
     // get total orders
-    public List<OrderTotalInfoGetResponse> getTotalOrders() {
+    public List<OrderInfoGetResponse> getTotalOrders() {
 
-        List<OrderTotalInfoGetResponse> orderTotalInfoGetResponses = orders.stream()
-                .map(order -> OrderTotalInfoGetResponse.builder()
+        List<OrderInfoGetResponse> orderInfoGetRespons = orders.stream()
+                .map(order -> OrderInfoGetResponse.builder()
                         .order(order).build())
                 .collect(Collectors.toList());
 
-        return orderTotalInfoGetResponses;
+        return orderInfoGetRespons;
     }
 
     // get total orders
-    public List<CanceledOrderTotalInfoGetResponse> getTotalCanceledOrders() {
+    public List<CanceledOrderInfoGetResponse> getTotalCanceledOrders() {
 
-        List<CanceledOrderTotalInfoGetResponse> canceledOrderTotalInfoGetResponses = canceledOrders.stream()
-                .map(canceledOrder -> CanceledOrderTotalInfoGetResponse.builder()
+        List<CanceledOrderInfoGetResponse> canceledOrderInfoGetResponse = canceledOrders.stream()
+                .map(canceledOrder -> CanceledOrderInfoGetResponse.builder()
                         .canceledOrder(canceledOrder).build())
                 .collect(Collectors.toList());
 
-        return canceledOrderTotalInfoGetResponses;
+        return canceledOrderInfoGetResponse;
     }
 
     // cancel order

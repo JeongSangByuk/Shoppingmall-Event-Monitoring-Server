@@ -2,9 +2,10 @@ package com.ssg.shoppingserver.domain.user.application;
 
 import com.ssg.shoppingserver.domain.user.domain.MembershipLevel;
 import com.ssg.shoppingserver.domain.user.domain.User;
-import com.ssg.shoppingserver.domain.user.dto.UserTotalInfoGetResponse;
+import com.ssg.shoppingserver.domain.user.dto.UserInfoGetResponse;
 import com.ssg.shoppingserver.domain.user.dto.UserSignupEventRequest;
 import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService {
 
+    @Getter
     // user 메모리 보관 queue
     private Queue<User> users = new ConcurrentLinkedQueue<User>();
 
@@ -51,15 +53,15 @@ public class UserService {
     }
 
     // get total users
-    public List<UserTotalInfoGetResponse> getTotalUsers() {
+    public List<UserInfoGetResponse> getTotalUsers() {
 
         // get total users
-        List<UserTotalInfoGetResponse> userTotalInfoGetResponses = users.stream()
-                .map(user -> UserTotalInfoGetResponse.builder()
+        List<UserInfoGetResponse> userInfoGetResponse = users.stream()
+                .map(user -> UserInfoGetResponse.builder()
                         .user(user).build())
                 .collect(Collectors.toList());
 
-        return userTotalInfoGetResponses;
+        return userInfoGetResponse;
     }
 
     // create mock user data

@@ -1,11 +1,8 @@
 package com.ssg.shoppingserver.domain.order.application;
 
 import com.ssg.shoppingserver.domain.order.domain.CartOrder;
-import com.ssg.shoppingserver.domain.order.domain.Order;
-import com.ssg.shoppingserver.domain.order.dto.CanceledOrderTotalInfoGetResponse;
 import com.ssg.shoppingserver.domain.order.dto.CartOrderCreateEventRequest;
-import com.ssg.shoppingserver.domain.order.dto.CartOrderTotalInfoGetResponse;
-import com.ssg.shoppingserver.domain.order.dto.OrderCreateEventRequest;
+import com.ssg.shoppingserver.domain.order.dto.CartOrderInfoGetResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -34,14 +31,14 @@ public class CartOrderService {
     }
 
     // get total cart orders
-    public List<CartOrderTotalInfoGetResponse> getTotalCartOrders() {
+    public List<CartOrderInfoGetResponse> getTotalCartOrders() {
 
-        List<CartOrderTotalInfoGetResponse> cartOrderTotalInfoGetResponses = cartOrders.stream()
-                .map(cartOrder -> CartOrderTotalInfoGetResponse.builder()
+        List<CartOrderInfoGetResponse> cartOrderInfoGetResponse = cartOrders.stream()
+                .map(cartOrder -> CartOrderInfoGetResponse.builder()
                         .cartOrder(cartOrder).build())
                 .collect(Collectors.toList());
 
-        return cartOrderTotalInfoGetResponses;
+        return cartOrderInfoGetResponse;
     }
 
 }
