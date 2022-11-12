@@ -1,6 +1,7 @@
 package com.ssg.shoppingserver.domain.user.application;
 
 import com.ssg.shoppingserver.domain.order.application.OrderService;
+import com.ssg.shoppingserver.domain.order.domain.OrderState;
 import com.ssg.shoppingserver.domain.user.domain.MembershipLevel;
 import com.ssg.shoppingserver.domain.user.domain.User;
 import com.ssg.shoppingserver.domain.user.dto.UserInfoGetResponse;
@@ -28,6 +29,8 @@ public class UserSearchService {
 
     private String ORDER_PRODUCTS_IDS_KEY = "orderedProductIds";
 
+    private String ORDER_STATE_KEY = "orderStates";
+
     // user 검색
     public List<UserInfoGetResponse> searchUser(UserSearchRequest userSearchRequest) {
 
@@ -38,9 +41,11 @@ public class UserSearchService {
                         checkByMembershipLevel(user, userSearchRequest)
                                 && checkBySmilClubMember(user, userSearchRequest)
                                 && checkByOrderedProduct(user, userSearchRequest)
+                                && checkByOrderState(user, userSearchRequest)
 
                 ).collect(Collectors.toList());
 
+        // change to dto
         List<UserInfoGetResponse> searchedUsersResponse = searchedUser.stream()
                 .map(user -> UserInfoGetResponse.builder()
                         .user(user).build())
@@ -111,7 +116,32 @@ public class UserSearchService {
 
         // order 내역 하나도 없다면 false 반환
         return false;
+    }
 
+    // 주문 상태로 검색
+    public boolean checkByOrderState(User user, UserSearchRequest userSearchRequest) {
+
+        Long[] orderStates = userSearchRequest.getOrderStates();
+
+        // ALL 조건일 경우. 그냥 true 리턴
+        if (userSearchRequest.getIsAllChecked().get(ORDER_STATE_KEY))
+            return true;
+
+        for (Long orderState : orderStates) {
+
+            boolean isMatchOrderState = orderService.getOrders().stream().anyMatch(order ->
+
+                    // order 내역의 userId와 orderState 모두 같은지
+                    order.getUserId().equals(user.getId()) &&
+                            order.getOrderState().equals(OrderState.findByCode(orderState)));
+
+            // order 내역이 하나라도 있다면 true 반환
+            if (isMatchOrderState)
+                return true;
+        }
+
+        // order 내역 하나도 없다면 false 반환
+        return false;
     }
 
 }

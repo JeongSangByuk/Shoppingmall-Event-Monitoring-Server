@@ -1,7 +1,7 @@
 [
   {
     "id": "988a7928-16e8-41f1-a197-38c1d7bbb2a1",
-    "name": "검정 패딩 01",
+    "name": "검정 패딩",
     "quantity": 20,
     "price": 25000,
     "productCategory": 1,
@@ -9,7 +9,7 @@
   },
   {
     "id": "8041bbfd-2ebf-4a4e-bedd-157285d1333d",
-    "name": "파란 화장품 01",
+    "name": "파란 화장품",
     "quantity": 12,
     "price": 12300,
     "productCategory": 2,
@@ -18,7 +18,7 @@
   },
   {
     "id": "296ce411-c5f3-47de-9224-7be772b1c576",
-    "name": "빨간 야구공 01",
+    "name": "빨간 야구공",
     "quantity": 20,
     "price": 40000,
     "productCategory": 3,
@@ -26,7 +26,7 @@
   },
   {
     "id": "1d6ab404-6b5a-4b99-bcea-68d3605fe42d",
-    "name": "초록 채소 01",
+    "name": "초록 채소",
     "quantity": 20,
     "price": 123400,
     "productCategory": 4,
@@ -34,7 +34,7 @@
   },
   {
     "id": "e6150ec1-343d-41ec-9e91-463d298a606c",
-    "name": "황색 티비 01",
+    "name": "황색 티비",
     "quantity": 20,
     "price": 12300,
     "productCategory": 5,
@@ -42,7 +42,7 @@
   },
   {
     "id": "3f8e2a5f-94ab-4490-a9bc-e43c48d472ea",
-    "name": "흰색 책 01",
+    "name": "흰색 책",
     "quantity": 20,
     "price": 12300,
     "productCategory": 6,
@@ -50,7 +50,7 @@
   },
   {
     "id": "b53b7fea-a23f-487b-acf8-bf221885963d",
-    "name": "회색 티슈 01",
+    "name": "회색 티슈",
     "quantity": 20,
     "price": 142900,
     "productCategory": 7,

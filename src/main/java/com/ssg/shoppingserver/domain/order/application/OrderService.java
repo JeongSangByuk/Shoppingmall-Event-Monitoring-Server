@@ -85,7 +85,7 @@ public class OrderService {
     // cancel order
     public void cancelOrder(OrderCancelEventRequest orderCancelEventRequest) {
 
-        // find by
+        // find by id
         Order orderById = orders.stream()
                 .filter(order -> order.getId().equals(orderCancelEventRequest.getOrderId()))
                 .findFirst().orElseThrow(() -> new IllegalArgumentException());
@@ -93,8 +93,8 @@ public class OrderService {
         // add canceled order
         canceledOrders.add(new CanceledOrder(orderById, OrderCancelReason.findByCode(orderCancelEventRequest.getOrderCancelReasonCode()), LocalDateTime.now()));
 
-        // remove order
-        orders.remove(orderById);
+        // change canceled order state
+        orderById.changeToCancelState();
 
     }
 

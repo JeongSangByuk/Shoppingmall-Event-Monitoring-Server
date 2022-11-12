@@ -17,4 +17,6 @@ public class UserSearchRequest {
 
     private String[] orderedProductIds;
 
+    private Long[] orderStates;
+
 }
