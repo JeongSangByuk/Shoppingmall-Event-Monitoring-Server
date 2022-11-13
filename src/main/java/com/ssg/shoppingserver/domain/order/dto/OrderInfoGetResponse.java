@@ -2,7 +2,7 @@ package com.ssg.shoppingserver.domain.order.dto;
 
 import com.ssg.shoppingserver.domain.order.domain.Order;
 import com.ssg.shoppingserver.domain.order.domain.OrderState;
-import lombok.AccessLevel;
+import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +33,7 @@ public class OrderInfoGetResponse {
     private OrderState orderState;
 
     // 주문 일시
-    private LocalDateTime createdTime;
+    private String createdAt;
 
     @Builder
     public OrderInfoGetResponse(Order order) {
@@ -43,6 +43,6 @@ public class OrderInfoGetResponse {
         this.productQuantity = order.getProductQuantity();
         this.totalPrice = order.getTotalPrice();
         this.orderState = order.getOrderState();
-        this.createdTime = order.getCreatedAt();
+        this.createdAt = order.getCreatedAt().format(BaseLocalDateTimeFormatter.getLocalTimeFormatter());
     }
 }

@@ -17,4 +17,6 @@ public class OrderSearchRequest {
 
     private Long minTotalQuantity;
 
+    private Long time;
+
 }

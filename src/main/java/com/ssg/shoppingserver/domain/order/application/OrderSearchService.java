@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -26,14 +28,18 @@ public class OrderSearchService {
     private final String MIN_TOTAL_QUANTITY_KEY = "minTotalQuantity";
 
 
+    private final LocalDateTime baseTime = LocalDateTime.of(2022, 11, 10, 10, 00, 00);
+
+
     // order 검색
     public List<OrderInfoGetResponse> searchOrder(OrderSearchRequest orderSearchRequest) {
 
         List<Order> orders = orderService.getOrders().stream()
                 .filter(order ->
-                        checkByOrderState(order, orderSearchRequest)
-                        && checkByMinValue(order, orderSearchRequest, MIN_TOTAL_PRICE_KEY)
-                        && checkByMinValue(order, orderSearchRequest, MIN_TOTAL_QUANTITY_KEY)
+                        checkByTime(order, orderSearchRequest)
+                                && checkByOrderState(order, orderSearchRequest)
+                                && checkByMinValue(order, orderSearchRequest, MIN_TOTAL_PRICE_KEY)
+                                && checkByMinValue(order, orderSearchRequest, MIN_TOTAL_QUANTITY_KEY)
                 ).collect(Collectors.toList());
 
         List<OrderInfoGetResponse> orderInfoGetResponses = orders.stream()
@@ -71,7 +77,7 @@ public class OrderSearchService {
         Long optionValue;
         Long orderValue;
 
-        switch (option){
+        switch (option) {
             case MIN_TOTAL_PRICE_KEY:
                 optionValue = orderSearchRequest.getMinTotalPrice();
                 orderValue = order.getTotalPrice();
@@ -94,6 +100,19 @@ public class OrderSearchService {
 
         return false;
 
+    }
+
+    // 시간을 통한 게산
+    public boolean checkByTime(Order order, OrderSearchRequest orderSearchRequest) {
+
+        // 시간 차이 계산
+        Duration duration = Duration.between(order.getCreatedAt(), baseTime);
+
+        // 특정 시간 기준 이내인지
+        if (duration.getSeconds() <= orderSearchRequest.getTime())
+            return true;
+
+        return false;
     }
 
 }
