@@ -4,6 +4,7 @@ import com.ssg.shoppingserver.domain.product.domain.Product;
 import com.ssg.shoppingserver.domain.product.domain.ProductCategory;
 import com.ssg.shoppingserver.domain.product.dto.ProductInfoGetResponse;
 import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductService {
 
+    @Getter
     // product 메모리 보관 queue
     private Queue<Product> products = new ConcurrentLinkedQueue<Product>();
 

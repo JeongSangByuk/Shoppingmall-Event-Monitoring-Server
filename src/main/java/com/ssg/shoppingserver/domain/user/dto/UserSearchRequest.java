@@ -13,7 +13,7 @@ public class UserSearchRequest {
 
     private Long[] membershipLevelCodes;
 
-    private boolean[] isSmileClubMembers;
+    private Boolean[] isSmileClubMembers;
 
     private String[] orderedProductIds;
 

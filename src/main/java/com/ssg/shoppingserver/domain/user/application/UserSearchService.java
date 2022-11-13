@@ -23,13 +23,13 @@ public class UserSearchService {
 
     private final OrderService orderService;
 
-    private String MEMBERSHIP_LEVEL_CODE_KEY = "membershipLevelCodes";
+    private final String MEMBERSHIP_LEVEL_CODE_KEY = "membershipLevelCodes";
 
-    private String SMILE_CLUB_MEMBERS_KEY = "isSmileClubMembers";
+    private final String SMILE_CLUB_MEMBERS_KEY = "isSmileClubMembers";
 
-    private String ORDER_PRODUCTS_IDS_KEY = "orderedProductIds";
+    private final String ORDER_PRODUCTS_IDS_KEY = "orderedProductIds";
 
-    private String ORDER_STATE_KEY = "orderStates";
+    private final String ORDER_STATE_KEY = "orderStates";
 
     // user 검색
     public List<UserInfoGetResponse> searchUser(UserSearchRequest userSearchRequest) {
@@ -76,7 +76,7 @@ public class UserSearchService {
     // 스마일클럽 가입 여부로 검색 체크
     public boolean checkBySmilClubMember(User user, UserSearchRequest userSearchRequest) {
 
-        boolean[] isSmileClubMembers = userSearchRequest.getIsSmileClubMembers();
+        Boolean[] isSmileClubMembers = userSearchRequest.getIsSmileClubMembers();
 
         // ALL 조건일 경우. 그냥 true 리턴
         if (userSearchRequest.getIsAllChecked().get(SMILE_CLUB_MEMBERS_KEY))

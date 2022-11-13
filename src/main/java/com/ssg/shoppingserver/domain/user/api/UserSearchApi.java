@@ -21,7 +21,7 @@ public class UserSearchApi {
     private final UserSearchService userSearchService;
 
     @PostMapping("/users/searching")
-    private List<UserInfoGetResponse> getTest(@RequestBody @Valid UserSearchRequest userSearchRequest) {
+    private List<UserInfoGetResponse> getUsers(@RequestBody @Valid UserSearchRequest userSearchRequest) {
 
         return userSearchService.searchUser(userSearchRequest);
     }

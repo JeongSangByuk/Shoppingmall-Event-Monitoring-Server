@@ -18,6 +18,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -40,6 +41,7 @@ public class OrderService {
     // Order 메모리 보관 queue
     private Queue<Order> orders = new ConcurrentLinkedQueue<Order>();
 
+    @Getter
     // Canceled Order 메모리 보관 queue
     private Queue<CanceledOrder> canceledOrders = new ConcurrentLinkedQueue<CanceledOrder>();
 
