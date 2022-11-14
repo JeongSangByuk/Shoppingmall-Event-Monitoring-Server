@@ -27,10 +27,6 @@ public class UserSearchService {
 
     private final String SMILE_CLUB_MEMBERS_KEY = "isSmileClubMembers";
 
-    private final String ORDER_PRODUCTS_IDS_KEY = "orderedProductIds";
-
-    private final String ORDER_STATE_KEY = "orderStates";
-
     // user 검색
     public List<UserInfoGetResponse> searchUser(UserSearchRequest userSearchRequest) {
 
@@ -97,17 +93,18 @@ public class UserSearchService {
         String[] orderedProductIds = userSearchRequest.getOrderedProductIds();
 
         // ALL 조건일 경우. 그냥 true 리턴
-        if (userSearchRequest.getIsAllChecked().get(ORDER_PRODUCTS_IDS_KEY))
-            return true;
+//        if (userSearchRequest.getIsAllChecked().get(ORDER_PRODUCTS_IDS_KEY))
+//            return true;
 
         for (String orderedProductId : orderedProductIds) {
 
             // order list 순회하며 product 주문 내역이 있는지 검사.
             boolean isOrderExist = orderService.getOrders().stream().anyMatch(order ->
 
-                    // order 내역의 userId와 productId 모두 같은지
-                    order.getUserId().equals(user.getId()) &&
-                            order.getProductId().equals(UUID.fromString(orderedProductId)));
+                    // order 내역의 userId와 productId 모두 같은지, 시간이 적합성 검사
+                    orderService.checkByTime(order, userSearchRequest.getTime())
+                            && order.getUserId().equals(user.getId())
+                            && order.getProductId().equals(UUID.fromString(orderedProductId)));
 
             // order 내역이 하나라도 있다면 true 반환
             if (isOrderExist)
@@ -124,16 +121,18 @@ public class UserSearchService {
         Long[] orderStates = userSearchRequest.getOrderStates();
 
         // ALL 조건일 경우. 그냥 true 리턴
-        if (userSearchRequest.getIsAllChecked().get(ORDER_STATE_KEY))
-            return true;
+//        if (userSearchRequest.getIsAllChecked().get(ORDER_STATE_KEY))
+//            return true;
+
 
         for (Long orderState : orderStates) {
 
             boolean isMatchOrderState = orderService.getOrders().stream().anyMatch(order ->
 
-                    // order 내역의 userId와 orderState 모두 같은지
-                    order.getUserId().equals(user.getId()) &&
-                            order.getOrderState().equals(OrderState.findByCode(orderState)));
+                    // order 내역의 userId와 orderState 모두 같은지, 또한 주문 상태에 있는지, 시간 적합성 검사
+                    orderService.checkByTime(order, userSearchRequest.getTime())
+                            && order.getUserId().equals(user.getId())
+                            && order.getOrderState().equals(OrderState.findByCode(orderState)));
 
             // order 내역이 하나라도 있다면 true 반환
             if (isMatchOrderState)

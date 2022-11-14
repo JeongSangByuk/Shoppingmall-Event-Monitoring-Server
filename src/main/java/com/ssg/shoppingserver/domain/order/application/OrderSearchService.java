@@ -28,15 +28,12 @@ public class OrderSearchService {
     private final String MIN_TOTAL_QUANTITY_KEY = "minTotalQuantity";
 
 
-    private final LocalDateTime baseTime = LocalDateTime.of(2022, 11, 10, 10, 00, 00);
-
-
     // order 검색
     public List<OrderInfoGetResponse> searchOrder(OrderSearchRequest orderSearchRequest) {
 
         List<Order> orders = orderService.getOrders().stream()
                 .filter(order ->
-                        checkByTime(order, orderSearchRequest)
+                        orderService.checkByTime(order, orderSearchRequest.getTime())
                                 && checkByOrderState(order, orderSearchRequest)
                                 && checkByMinValue(order, orderSearchRequest, MIN_TOTAL_PRICE_KEY)
                                 && checkByMinValue(order, orderSearchRequest, MIN_TOTAL_QUANTITY_KEY)
@@ -102,17 +99,5 @@ public class OrderSearchService {
 
     }
 
-    // 시간을 통한 게산
-    public boolean checkByTime(Order order, OrderSearchRequest orderSearchRequest) {
-
-        // 시간 차이 계산
-        Duration duration = Duration.between(order.getCreatedAt(), baseTime);
-
-        // 특정 시간 기준 이내인지
-        if (duration.getSeconds() <= orderSearchRequest.getTime())
-            return true;
-
-        return false;
-    }
 
 }

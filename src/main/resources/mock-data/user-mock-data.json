@@ -38,5 +38,53 @@
     "membershipLevel": 2,
     "isSmileClubMember": "false",
     "createdAt": "2022-11-11 18:05:57"
+  },
+  {
+    "id" : "511e68e7-d8d7-4432-b508-c9f2341bd666",
+    "email": "test06@ssg.com",
+    "name": "조형준",
+    "membershipLevel": 1,
+    "isSmileClubMember": "true",
+    "createdAt": "2022-11-11 18:05:57"
+  },
+  {
+    "id" : "a56a3629-b185-4af3-a482-c2c52d1faed0",
+    "email": "test07@ssg.com",
+    "name": "홍영환",
+    "membershipLevel": 3,
+    "isSmileClubMember": "true",
+    "createdAt": "2022-11-11 18:05:57"
+  },
+  {
+    "id" : "9d994108-9a93-43dc-bd18-27910d5e9bae",
+    "email": "test08@ssg.com",
+    "name": "박대원",
+    "membershipLevel": 2,
+    "isSmileClubMember": "false",
+    "createdAt": "2022-11-11 18:05:57"
+  },
+  {
+    "id" : "91ef35bf-bf9d-427d-abee-39b01c1a17e3",
+    "email": "test09@ssg.com",
+    "name": "박민지",
+    "membershipLevel": 2,
+    "isSmileClubMember": "true",
+    "createdAt": "2022-11-11 18:05:57"
+  },
+  {
+    "id" : "bc881144-562b-415f-8616-367946873144",
+    "email": "test10@ssg.com",
+    "name": "김영림",
+    "membershipLevel": 3,
+    "isSmileClubMember": "false",
+    "createdAt": "2022-11-11 18:05:57"
+  },
+  {
+    "id" : "8c56221b-6501-48a5-964d-b5f1aa728923",
+    "email": "test11@ssg.com",
+    "name": "조준희",
+    "membershipLevel": 1,
+    "isSmileClubMember": "true",
+    "createdAt": "2022-11-11 18:05:57"
   }
 ]

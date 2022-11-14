@@ -19,4 +19,6 @@ public class UserSearchRequest {
 
     private Long[] orderStates;
 
+    private Long time;
+
 }

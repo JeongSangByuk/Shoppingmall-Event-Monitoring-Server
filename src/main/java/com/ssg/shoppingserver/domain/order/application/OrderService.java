@@ -4,10 +4,7 @@ import com.ssg.shoppingserver.domain.order.domain.CanceledOrder;
 import com.ssg.shoppingserver.domain.order.domain.Order;
 import com.ssg.shoppingserver.domain.order.domain.OrderCancelReason;
 import com.ssg.shoppingserver.domain.order.domain.OrderState;
-import com.ssg.shoppingserver.domain.order.dto.CanceledOrderInfoGetResponse;
-import com.ssg.shoppingserver.domain.order.dto.OrderCancelEventRequest;
-import com.ssg.shoppingserver.domain.order.dto.OrderCreateEventRequest;
-import com.ssg.shoppingserver.domain.order.dto.OrderInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.dto.*;
 import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,14 +14,20 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Queue;
@@ -36,6 +39,12 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class OrderService {
+
+    // 기준 시간.
+    private final LocalDateTime baseTime = LocalDateTime.of(2022, 11, 10, 10, 00, 00);
+
+    // 설정 없음의 값
+    private final Long NOT_LIMITED_TIME = 100000L;
 
     @Getter
     // Order 메모리 보관 queue
@@ -104,9 +113,8 @@ public class OrderService {
     public void createMockData() throws IOException, ParseException {
 
         // get mock data json file
-        ClassPathResource resource = new ClassPathResource("mock-data/order-mock-data.json");
-        Path path = Paths.get(resource.getURI());
-        String json = Files.readString(path);
+        ClassPathResource cpr = new ClassPathResource("mock-data/order-mock-data.json");
+        String json = new String(FileCopyUtils.copyToByteArray(cpr.getInputStream()), StandardCharsets.UTF_8);
 
         // parsing json
         JSONArray mockOrders = (JSONArray) new JSONParser().parse(json);
@@ -129,6 +137,22 @@ public class OrderService {
             // mock product data add
             orders.add(order);
         }
+    }
+
+    // 시간을 통한 게산
+    public boolean checkByTime(Order order, Long time) {
+
+        if(time.equals(NOT_LIMITED_TIME))
+            return true;
+
+        // 시간 차이 계산
+        Duration duration = Duration.between(order.getCreatedAt(), baseTime);
+
+        // 특정 시간 기준 이내인지
+        if (duration.getSeconds() <= time)
+            return true;
+
+        return false;
     }
 
 }

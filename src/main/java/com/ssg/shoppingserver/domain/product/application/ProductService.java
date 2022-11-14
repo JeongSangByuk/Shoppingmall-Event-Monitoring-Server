@@ -7,15 +7,24 @@ import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 
 import javax.annotation.PostConstruct;
+import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -58,9 +67,8 @@ public class ProductService {
     public void createMockData() throws IOException, ParseException {
 
         // get mock data json file
-        ClassPathResource resource = new ClassPathResource("mock-data/product-mock-data.json");
-        Path path = Paths.get(resource.getURI());
-        String json = Files.readString(path);
+        ClassPathResource cpr = new ClassPathResource("mock-data/product-mock-data.json");
+        String json = new String(FileCopyUtils.copyToByteArray(cpr.getInputStream()), StandardCharsets.UTF_8);
 
         // parsing json
         JSONArray mockProducts = (JSONArray) new JSONParser().parse(json);
