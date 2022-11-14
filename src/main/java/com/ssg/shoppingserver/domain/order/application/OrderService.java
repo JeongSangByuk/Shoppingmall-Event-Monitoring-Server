@@ -4,7 +4,13 @@ import com.ssg.shoppingserver.domain.order.domain.CanceledOrder;
 import com.ssg.shoppingserver.domain.order.domain.Order;
 import com.ssg.shoppingserver.domain.order.domain.OrderCancelReason;
 import com.ssg.shoppingserver.domain.order.domain.OrderState;
-import com.ssg.shoppingserver.domain.order.dto.*;
+import com.ssg.shoppingserver.domain.order.dto.request.OrderCancelEventRequest;
+import com.ssg.shoppingserver.domain.order.dto.request.OrderCreateEventRequest;
+import com.ssg.shoppingserver.domain.order.dto.response.CanceledOrderInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.dto.response.OrderCancelEventResponse;
+import com.ssg.shoppingserver.domain.order.dto.response.OrderCreateEventResponse;
+import com.ssg.shoppingserver.domain.order.dto.response.OrderInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.repository.OrderRepository;
 import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -14,19 +20,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -46,35 +45,30 @@ public class OrderService {
     // 설정 없음의 값
     private final Long NOT_LIMITED_TIME = 100000L;
 
-    @Getter
-    // Order 메모리 보관 queue
-    private Queue<Order> orders = new ConcurrentLinkedQueue<Order>();
-
-    @Getter
-    // Canceled Order 메모리 보관 queue
-    private Queue<CanceledOrder> canceledOrders = new ConcurrentLinkedQueue<CanceledOrder>();
-
-    @PostConstruct
-    private void init() throws IOException, ParseException {
-
-        // create mock order data
-        createMockData();
-    }
+    private final OrderRepository orderRepository;
 
     // create order, order add
-    public void createOrder(OrderCreateEventRequest orderCreateEventRequest) {
+    public OrderCreateEventResponse createOrder(OrderCreateEventRequest orderCreateEventRequest) {
 
         // get order entity
         Order order = orderCreateEventRequest.toEntity();
 
         // order add
-        orders.add(order);
+        orderRepository.getOrders().add(order);
+
+        // create response dto
+        OrderCreateEventResponse orderCreateEventResponse = OrderCreateEventResponse.builder()
+                .id(order.getId())
+                .totalPrice(order.getTotalPrice())
+                .orderState(order.getOrderState()).build();
+
+        return orderCreateEventResponse;
     }
 
     // get total orders
     public List<OrderInfoGetResponse> getTotalOrders() {
 
-        List<OrderInfoGetResponse> orderInfoGetRespons = orders.stream()
+        List<OrderInfoGetResponse> orderInfoGetRespons = orderRepository.getOrders().stream()
                 .map(order -> OrderInfoGetResponse.builder()
                         .order(order).build())
                 .collect(Collectors.toList());
@@ -85,7 +79,7 @@ public class OrderService {
     // get total orders
     public List<CanceledOrderInfoGetResponse> getTotalCanceledOrders() {
 
-        List<CanceledOrderInfoGetResponse> canceledOrderInfoGetResponse = canceledOrders.stream()
+        List<CanceledOrderInfoGetResponse> canceledOrderInfoGetResponse = orderRepository.getCanceledOrders().stream()
                 .map(canceledOrder -> CanceledOrderInfoGetResponse.builder()
                         .canceledOrder(canceledOrder).build())
                 .collect(Collectors.toList());
@@ -94,49 +88,26 @@ public class OrderService {
     }
 
     // cancel order
-    public void cancelOrder(OrderCancelEventRequest orderCancelEventRequest) {
+    public OrderCancelEventResponse cancelOrder(OrderCancelEventRequest orderCancelEventRequest) {
 
         // find by id
-        Order orderById = orders.stream()
+        Order orderById = orderRepository.getOrders().stream()
                 .filter(order -> order.getId().equals(orderCancelEventRequest.getOrderId()))
                 .findFirst().orElseThrow(() -> new IllegalArgumentException());
 
         // add canceled order
-        canceledOrders.add(new CanceledOrder(orderById, OrderCancelReason.findByCode(orderCancelEventRequest.getOrderCancelReasonCode()), LocalDateTime.now()));
+        orderRepository.getCanceledOrders().add(new CanceledOrder(orderById, OrderCancelReason.findByCode(orderCancelEventRequest.getOrderCancelReasonCode()), LocalDateTime.now()));
 
         // change canceled order state
         orderById.changeToCancelState();
 
-    }
+        // create response dto
+        OrderCancelEventResponse orderCancelEventResponse = OrderCancelEventResponse.builder()
+                .orderId(orderById.getId())
+                .orderCancelReason(OrderCancelReason.findByCode(orderCancelEventRequest.getOrderCancelReasonCode())).build();
 
-    // create mock order data
-    public void createMockData() throws IOException, ParseException {
+        return orderCancelEventResponse;
 
-        // get mock data json file
-        ClassPathResource cpr = new ClassPathResource("mock-data/order-mock-data.json");
-        String json = new String(FileCopyUtils.copyToByteArray(cpr.getInputStream()), StandardCharsets.UTF_8);
-
-        // parsing json
-        JSONArray mockOrders = (JSONArray) new JSONParser().parse(json);
-
-        // add mock order data
-        for (Object mockOrdersObjet : mockOrders) {
-
-            JSONObject mockOrder = (JSONObject) mockOrdersObjet;
-
-            // create mock order entity
-            Order order = Order.builder()
-                    .id(UUID.fromString((String) mockOrder.get("id")))
-                    .userId(UUID.fromString((String) mockOrder.get("userId")))
-                    .productId(UUID.fromString((String) mockOrder.get("productId")))
-                    .totalPrice((Long) mockOrder.get("totalPrice"))
-                    .productQuantity((Long) mockOrder.get("productQuantity"))
-                    .orderState(OrderState.findByCode((Long) mockOrder.get("orderState")))
-                    .createdAt(LocalDateTime.parse((String) mockOrder.get("createdAt"), BaseLocalDateTimeFormatter.getLocalTimeFormatter())).build();
-
-            // mock product data add
-            orders.add(order);
-        }
     }
 
     // 시간을 통한 게산

@@ -1,14 +1,11 @@
 package com.ssg.shoppingserver.domain.order.domain;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Getter
 @SuperBuilder
@@ -25,12 +22,12 @@ public class CanceledOrder extends Order {
     private OrderCancelReason orderCancelReason;
 
     // 주문 취소 일시
-    private LocalDateTime canceledTime;
+    private LocalDateTime canceledAt;
 
-    public CanceledOrder(Order order, OrderCancelReason orderCancelReason, LocalDateTime canceledTime) {
+    public CanceledOrder(Order order, OrderCancelReason orderCancelReason, LocalDateTime canceledAt) {
         super(order.getId(), order.getUserId(), order.getProductId(), order.getProductQuantity(), order.getTotalPrice()
                 , order.getOrderState(), order.getCreatedAt());
         this.orderCancelReason = orderCancelReason;
-        this.canceledTime = canceledTime;
+        this.canceledAt = canceledAt;
     }
 }

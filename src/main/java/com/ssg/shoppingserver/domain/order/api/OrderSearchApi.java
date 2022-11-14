@@ -1,10 +1,8 @@
 package com.ssg.shoppingserver.domain.order.api;
 
 import com.ssg.shoppingserver.domain.order.application.OrderSearchService;
-import com.ssg.shoppingserver.domain.order.dto.OrderInfoGetResponse;
-import com.ssg.shoppingserver.domain.order.dto.OrderSearchRequest;
-import com.ssg.shoppingserver.domain.user.dto.UserInfoGetResponse;
-import com.ssg.shoppingserver.domain.user.dto.UserSearchRequest;
+import com.ssg.shoppingserver.domain.order.dto.response.OrderInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.dto.request.OrderSearchRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;

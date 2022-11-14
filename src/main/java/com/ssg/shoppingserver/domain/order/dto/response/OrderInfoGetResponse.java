@@ -1,4 +1,4 @@
-package com.ssg.shoppingserver.domain.order.dto;
+package com.ssg.shoppingserver.domain.order.dto.response;
 
 import com.ssg.shoppingserver.domain.order.domain.Order;
 import com.ssg.shoppingserver.domain.order.domain.OrderState;

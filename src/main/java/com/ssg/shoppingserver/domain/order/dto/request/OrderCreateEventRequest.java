@@ -1,4 +1,4 @@
-package com.ssg.shoppingserver.domain.order.dto;
+package com.ssg.shoppingserver.domain.order.dto.request;
 
 import com.ssg.shoppingserver.domain.order.domain.Order;
 import com.ssg.shoppingserver.domain.order.domain.OrderState;
@@ -35,6 +35,15 @@ public class OrderCreateEventRequest {
     @NotNull
     // 주문 현재 상태
     private Long orderStateCode;
+
+    @Builder
+    public OrderCreateEventRequest(UUID userId, UUID productId, Long productQuantity, Long totalPrice, Long orderStateCode) {
+        this.userId = userId;
+        this.productId = productId;
+        this.productQuantity = productQuantity;
+        this.totalPrice = totalPrice;
+        this.orderStateCode = orderStateCode;
+    }
 
     // dto to entity
     public Order toEntity() {

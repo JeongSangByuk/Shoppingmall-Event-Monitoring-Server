@@ -1,4 +1,4 @@
-package com.ssg.shoppingserver.domain.user.dto;
+package com.ssg.shoppingserver.domain.user.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ssg.shoppingserver.domain.user.domain.MembershipLevel;

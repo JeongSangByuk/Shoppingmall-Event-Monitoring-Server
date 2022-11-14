@@ -1,8 +1,9 @@
 package com.ssg.shoppingserver.domain.user.api;
 
 import com.ssg.shoppingserver.domain.user.application.UserService;
-import com.ssg.shoppingserver.domain.user.dto.UserInfoGetResponse;
-import com.ssg.shoppingserver.domain.user.dto.UserSignupEventRequest;
+import com.ssg.shoppingserver.domain.user.dto.response.UserInfoGetResponse;
+import com.ssg.shoppingserver.domain.user.dto.request.UserSignupEventRequest;
+import com.ssg.shoppingserver.domain.user.dto.response.UserSignupEventResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,8 @@ public class UserApi {
 
     // user signup event creation api
     @PostMapping("/user/signup")
-    public void sigUp(@RequestBody @Valid UserSignupEventRequest userSignupEventRequest){
-        userService.signup(userSignupEventRequest);
+    public UserSignupEventResponse sigUp(@RequestBody @Valid UserSignupEventRequest userSignupEventRequest){
+        return userService.signup(userSignupEventRequest);
     }
 
 }

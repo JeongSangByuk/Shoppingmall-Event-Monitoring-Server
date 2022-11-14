@@ -1,9 +1,9 @@
-package com.ssg.shoppingserver.domain.order.dto;
+package com.ssg.shoppingserver.domain.order.dto.response;
 
 import com.ssg.shoppingserver.domain.order.domain.CanceledOrder;
-import com.ssg.shoppingserver.domain.order.domain.Order;
 import com.ssg.shoppingserver.domain.order.domain.OrderCancelReason;
 import com.ssg.shoppingserver.domain.order.domain.OrderState;
+import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,13 +34,13 @@ public class CanceledOrderInfoGetResponse {
     private OrderState orderState;
 
     // 주문 일시
-    private LocalDateTime createdTime;
+    private String createdAt;
 
     // CanceledOrder 이유(고객 취소 이유)
     private OrderCancelReason orderCancelReason;
 
     // 주문 취소 일시
-    private LocalDateTime canceledTime;
+    private String canceledAt;
 
     @Builder
     public CanceledOrderInfoGetResponse(CanceledOrder canceledOrder) {
@@ -50,8 +50,8 @@ public class CanceledOrderInfoGetResponse {
         this.productQuantity = canceledOrder.getProductQuantity();
         this.totalPrice = canceledOrder.getTotalPrice();
         this.orderState = canceledOrder.getOrderState();
-        this.createdTime = canceledOrder.getCanceledTime();
+        this.createdAt = canceledOrder.getCanceledAt().format(BaseLocalDateTimeFormatter.getLocalTimeFormatter());
         this.orderCancelReason = canceledOrder.getOrderCancelReason();
-        this.canceledTime = canceledOrder.getCanceledTime();
+        this.canceledAt = canceledOrder.getCanceledAt().format(BaseLocalDateTimeFormatter.getLocalTimeFormatter());
     }
 }

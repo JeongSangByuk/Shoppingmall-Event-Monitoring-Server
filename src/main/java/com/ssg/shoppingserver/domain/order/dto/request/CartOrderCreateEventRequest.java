@@ -1,4 +1,4 @@
-package com.ssg.shoppingserver.domain.order.dto;
+package com.ssg.shoppingserver.domain.order.dto.request;
 
 import com.ssg.shoppingserver.domain.order.domain.CartOrder;
 import com.ssg.shoppingserver.domain.order.domain.Order;

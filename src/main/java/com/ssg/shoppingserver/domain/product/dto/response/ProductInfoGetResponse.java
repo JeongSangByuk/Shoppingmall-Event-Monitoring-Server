@@ -1,4 +1,4 @@
-package com.ssg.shoppingserver.domain.product.dto;
+package com.ssg.shoppingserver.domain.product.dto.response;
 
 import com.ssg.shoppingserver.domain.product.domain.Product;
 import com.ssg.shoppingserver.domain.product.domain.ProductCategory;

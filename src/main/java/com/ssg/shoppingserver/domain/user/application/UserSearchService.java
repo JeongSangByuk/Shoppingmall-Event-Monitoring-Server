@@ -2,10 +2,12 @@ package com.ssg.shoppingserver.domain.user.application;
 
 import com.ssg.shoppingserver.domain.order.application.OrderService;
 import com.ssg.shoppingserver.domain.order.domain.OrderState;
+import com.ssg.shoppingserver.domain.order.repository.OrderRepository;
 import com.ssg.shoppingserver.domain.user.domain.MembershipLevel;
 import com.ssg.shoppingserver.domain.user.domain.User;
-import com.ssg.shoppingserver.domain.user.dto.UserInfoGetResponse;
-import com.ssg.shoppingserver.domain.user.dto.UserSearchRequest;
+import com.ssg.shoppingserver.domain.user.dto.response.UserInfoGetResponse;
+import com.ssg.shoppingserver.domain.user.dto.request.UserSearchRequest;
+import com.ssg.shoppingserver.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserSearchService {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
+
+    private final OrderRepository orderRepository;
 
     private final OrderService orderService;
 
@@ -30,7 +34,7 @@ public class UserSearchService {
     // user 검색
     public List<UserInfoGetResponse> searchUser(UserSearchRequest userSearchRequest) {
 
-        List<User> searchedUser = userService.getUsers().stream()
+        List<User> searchedUser = userRepository.getUsers().stream()
                 .filter(user ->
 
                         // 멤버십, 스마일 클럽 가입 여부, 주문된 상품 내역 필터링
@@ -99,7 +103,7 @@ public class UserSearchService {
         for (String orderedProductId : orderedProductIds) {
 
             // order list 순회하며 product 주문 내역이 있는지 검사.
-            boolean isOrderExist = orderService.getOrders().stream().anyMatch(order ->
+            boolean isOrderExist = orderRepository.getOrders().stream().anyMatch(order ->
 
                     // order 내역의 userId와 productId 모두 같은지, 시간이 적합성 검사
                     orderService.checkByTime(order, userSearchRequest.getTime())
@@ -127,7 +131,7 @@ public class UserSearchService {
 
         for (Long orderState : orderStates) {
 
-            boolean isMatchOrderState = orderService.getOrders().stream().anyMatch(order ->
+            boolean isMatchOrderState = orderRepository.getOrders().stream().anyMatch(order ->
 
                     // order 내역의 userId와 orderState 모두 같은지, 또한 주문 상태에 있는지, 시간 적합성 검사
                     orderService.checkByTime(order, userSearchRequest.getTime())

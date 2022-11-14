@@ -1,8 +1,8 @@
 package com.ssg.shoppingserver.domain.order.api;
 
 import com.ssg.shoppingserver.domain.order.application.CartOrderService;
-import com.ssg.shoppingserver.domain.order.dto.CartOrderCreateEventRequest;
-import com.ssg.shoppingserver.domain.order.dto.CartOrderInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.dto.request.CartOrderCreateEventRequest;
+import com.ssg.shoppingserver.domain.order.dto.response.CartOrderInfoGetResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

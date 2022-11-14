@@ -1,8 +1,9 @@
-package com.ssg.shoppingserver.domain.order.dto;
+package com.ssg.shoppingserver.domain.order.dto.response;
 
 import com.ssg.shoppingserver.domain.order.domain.CartOrder;
 import com.ssg.shoppingserver.domain.order.domain.Order;
 import com.ssg.shoppingserver.domain.order.domain.OrderState;
+import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +34,7 @@ public class CartOrderInfoGetResponse {
     private boolean isPersistent;
 
     // 장바구니 담기 일시
-    private LocalDateTime createdTime;
+    private String createdTime;
 
     @Builder
     public CartOrderInfoGetResponse(CartOrder cartOrder) {
@@ -43,6 +44,6 @@ public class CartOrderInfoGetResponse {
         this.productQuantity = cartOrder.getProductQuantity();
         this.totalPrice = cartOrder.getTotalPrice();
         this.isPersistent = cartOrder.isPersistent();
-        this.createdTime = cartOrder.getCreatedAt();
+        this.createdTime = cartOrder.getCreatedAt().format(BaseLocalDateTimeFormatter.getLocalTimeFormatter());
     }
 }

@@ -1,0 +1,33 @@
+{
+  "isAllChecked": {
+    "membershipLevelCodes": false,
+    "isSmileClubMembers": false,
+    "orderedProductIds": true,
+    "orderStates": true
+  },
+  "time": 1000000,
+  "membershipLevelCodes": [
+    1
+  ],
+  "isSmileClubMembers": [
+    true
+  ],
+  "orderedProductIds": [
+    "988a7928-16e8-41f1-a197-38c1d7bbb2a1",
+    "8041bbfd-2ebf-4a4e-bedd-157285d1333d",
+    "296ce411-c5f3-47de-9224-7be772b1c576",
+    "1d6ab404-6b5a-4b99-bcea-68d3605fe42d",
+    "e6150ec1-343d-41ec-9e91-463d298a606c",
+    "3f8e2a5f-94ab-4490-a9bc-e43c48d472ea",
+    "b53b7fea-a23f-487b-acf8-bf221885963d"
+  ],
+  "orderStates": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    9
+  ]
+}

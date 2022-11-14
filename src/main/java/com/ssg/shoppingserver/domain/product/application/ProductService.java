@@ -2,32 +2,23 @@ package com.ssg.shoppingserver.domain.product.application;
 
 import com.ssg.shoppingserver.domain.product.domain.Product;
 import com.ssg.shoppingserver.domain.product.domain.ProductCategory;
-import com.ssg.shoppingserver.domain.product.dto.ProductInfoGetResponse;
+import com.ssg.shoppingserver.domain.product.dto.response.ProductInfoGetResponse;
+import com.ssg.shoppingserver.domain.product.repository.ProductRepository;
 import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
 import javax.annotation.PostConstruct;
-import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Queue;
@@ -40,56 +31,17 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductService {
 
-    @Getter
-    // product 메모리 보관 queue
-    private Queue<Product> products = new ConcurrentLinkedQueue<Product>();
-
-    @PostConstruct
-    private void init() throws IOException, ParseException {
-
-        // create mock product data
-        createMockData();
-    }
+    private final ProductRepository productRepository;
 
     // get total products
     public List<ProductInfoGetResponse> getTotalProducts() {
 
         // get total products
-        List<ProductInfoGetResponse> productInfoGetRespons = products.stream()
+        List<ProductInfoGetResponse> productInfoGetResponse = productRepository.getProducts().stream()
                 .map(product -> ProductInfoGetResponse.builder()
                         .product(product).build())
                 .collect(Collectors.toList());
 
-        return productInfoGetRespons;
+        return productInfoGetResponse;
     }
-
-    // create mock product data
-    public void createMockData() throws IOException, ParseException {
-
-        // get mock data json file
-        ClassPathResource cpr = new ClassPathResource("mock-data/product-mock-data.json");
-        String json = new String(FileCopyUtils.copyToByteArray(cpr.getInputStream()), StandardCharsets.UTF_8);
-
-        // parsing json
-        JSONArray mockProducts = (JSONArray) new JSONParser().parse(json);
-
-        // add mock product data
-        for (Object mockProductsObjet : mockProducts) {
-
-            JSONObject mockProduct = (JSONObject) mockProductsObjet;
-
-            // create mock product entity
-            Product product = Product.builder()
-                    .id(UUID.fromString((String) mockProduct.get("id")))
-                    .name((String) mockProduct.get("name"))
-                    .quantity((Long) mockProduct.get("quantity"))
-                    .price((Long) mockProduct.get("price"))
-                    .productCategory(ProductCategory.findByCode((Long) mockProduct.get("productCategory")))
-                    .createdAt(LocalDateTime.parse((String) mockProduct.get("createdAt"), BaseLocalDateTimeFormatter.getLocalTimeFormatter())).build();
-
-            // mock product data add
-            products.add(product);
-        }
-    }
-
 }

@@ -1,8 +1,9 @@
 package com.ssg.shoppingserver.domain.order.application;
 
 import com.ssg.shoppingserver.domain.order.domain.CartOrder;
-import com.ssg.shoppingserver.domain.order.dto.CartOrderCreateEventRequest;
-import com.ssg.shoppingserver.domain.order.dto.CartOrderInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.dto.request.CartOrderCreateEventRequest;
+import com.ssg.shoppingserver.domain.order.dto.response.CartOrderInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CartOrderService {
 
-    // Cart Order 메모리 보관 queue
-    private Queue<CartOrder> cartOrders = new ConcurrentLinkedQueue<CartOrder>();
+    private final OrderRepository orderRepository;
 
     // create cart order, cart order add
     public void createCartOrder(CartOrderCreateEventRequest cartOrderCreateEventRequest) {
@@ -27,13 +27,13 @@ public class CartOrderService {
         CartOrder cartOrder = cartOrderCreateEventRequest.toEntity();
 
         // cart order add
-        cartOrders.add(cartOrder);
+        orderRepository.getCartOrders().add(cartOrder);
     }
 
     // get total cart orders
     public List<CartOrderInfoGetResponse> getTotalCartOrders() {
 
-        List<CartOrderInfoGetResponse> cartOrderInfoGetResponse = cartOrders.stream()
+        List<CartOrderInfoGetResponse> cartOrderInfoGetResponse = orderRepository.getCartOrders().stream()
                 .map(cartOrder -> CartOrderInfoGetResponse.builder()
                         .cartOrder(cartOrder).build())
                 .collect(Collectors.toList());

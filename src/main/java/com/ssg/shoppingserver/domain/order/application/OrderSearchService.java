@@ -2,16 +2,14 @@ package com.ssg.shoppingserver.domain.order.application;
 
 import com.ssg.shoppingserver.domain.order.domain.Order;
 import com.ssg.shoppingserver.domain.order.domain.OrderState;
-import com.ssg.shoppingserver.domain.order.dto.OrderInfoGetResponse;
-import com.ssg.shoppingserver.domain.order.dto.OrderSearchRequest;
+import com.ssg.shoppingserver.domain.order.dto.response.OrderInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.dto.request.OrderSearchRequest;
+import com.ssg.shoppingserver.domain.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,6 +18,8 @@ import java.util.stream.Collectors;
 public class OrderSearchService {
 
     private final OrderService orderService;
+
+    private final OrderRepository orderRepository;
 
     private final String ORDER_STATE_KEY = "orderStates";
 
@@ -31,7 +31,7 @@ public class OrderSearchService {
     // order 검색
     public List<OrderInfoGetResponse> searchOrder(OrderSearchRequest orderSearchRequest) {
 
-        List<Order> orders = orderService.getOrders().stream()
+        List<Order> orders = orderRepository.getOrders().stream()
                 .filter(order ->
                         orderService.checkByTime(order, orderSearchRequest.getTime())
                                 && checkByOrderState(order, orderSearchRequest)

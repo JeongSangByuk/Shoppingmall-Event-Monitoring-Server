@@ -1,8 +1,9 @@
-package com.ssg.shoppingserver.domain.order.dto;
+package com.ssg.shoppingserver.domain.order.dto.request;
 
 import com.ssg.shoppingserver.domain.order.domain.Order;
 import com.ssg.shoppingserver.domain.order.domain.OrderState;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
-@AllArgsConstructor
+@NoArgsConstructor
 public class OrderCancelEventRequest {
 
     @NotNull
@@ -20,6 +21,11 @@ public class OrderCancelEventRequest {
     private UUID orderId;
 
     @NotNull
-    private Long OrderCancelReasonCode;
+    private Long orderCancelReasonCode;
 
+    @Builder
+    public OrderCancelEventRequest(UUID orderId, Long orderCancelReasonCode) {
+        this.orderId = orderId;
+        this.orderCancelReasonCode = orderCancelReasonCode;
+    }
 }

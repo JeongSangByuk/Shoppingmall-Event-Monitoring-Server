@@ -1,7 +1,8 @@
-package com.ssg.shoppingserver.domain.user.dto;
+package com.ssg.shoppingserver.domain.user.dto.request;
 
 import com.ssg.shoppingserver.domain.user.domain.MembershipLevel;
 import com.ssg.shoppingserver.domain.user.domain.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +30,14 @@ public class UserSignupEventRequest {
     // User SSG Smile Club 회원 여부
     @NotNull
     private boolean isSmileClubMember;
+
+    @Builder
+    public UserSignupEventRequest(String email, String name, Long membershipLevelCode, boolean isSmileClubMember) {
+        this.email = email;
+        this.name = name;
+        this.membershipLevelCode = membershipLevelCode;
+        this.isSmileClubMember = isSmileClubMember;
+    }
 
     // dto to entity
     public User toEntity() {

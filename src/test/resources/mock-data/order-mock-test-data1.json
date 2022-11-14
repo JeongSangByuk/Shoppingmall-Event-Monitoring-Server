@@ -1,0 +1,11 @@
+{
+  "isAllChecked":{
+    "orderStates" : true,
+    "minTotalPrice" : true,
+    "minTotalQuantity" : true
+  },
+  "orderStates" : [9],
+  "minTotalPrice" : 10200,
+  "minTotalQuantity" : 1,
+  "time" : 43200
+}

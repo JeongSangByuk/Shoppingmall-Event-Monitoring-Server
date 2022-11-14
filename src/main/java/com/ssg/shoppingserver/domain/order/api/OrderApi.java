@@ -1,10 +1,12 @@
 package com.ssg.shoppingserver.domain.order.api;
 
 import com.ssg.shoppingserver.domain.order.application.OrderService;
-import com.ssg.shoppingserver.domain.order.dto.CanceledOrderInfoGetResponse;
-import com.ssg.shoppingserver.domain.order.dto.OrderCancelEventRequest;
-import com.ssg.shoppingserver.domain.order.dto.OrderCreateEventRequest;
-import com.ssg.shoppingserver.domain.order.dto.OrderInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.dto.response.CanceledOrderInfoGetResponse;
+import com.ssg.shoppingserver.domain.order.dto.request.OrderCancelEventRequest;
+import com.ssg.shoppingserver.domain.order.dto.request.OrderCreateEventRequest;
+import com.ssg.shoppingserver.domain.order.dto.response.OrderCancelEventResponse;
+import com.ssg.shoppingserver.domain.order.dto.response.OrderCreateEventResponse;
+import com.ssg.shoppingserver.domain.order.dto.response.OrderInfoGetResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -34,14 +36,14 @@ public class OrderApi {
 
     // order event creation api
     @PostMapping("/order")
-    public void createOrder(@RequestBody @Valid OrderCreateEventRequest orderCreateEventRequest) {
-        orderService.createOrder(orderCreateEventRequest);
+    public OrderCreateEventResponse createOrder(@RequestBody @Valid OrderCreateEventRequest orderCreateEventRequest) {
+        return orderService.createOrder(orderCreateEventRequest);
     }
 
     // order event deletion api
     @DeleteMapping("/order")
-    public void cancelOrder(@RequestBody @Valid OrderCancelEventRequest orderCancelEventRequest) {
-        orderService.cancelOrder(orderCancelEventRequest);
+    public OrderCancelEventResponse cancelOrder(@RequestBody @Valid OrderCancelEventRequest orderCancelEventRequest) {
+        return orderService.cancelOrder(orderCancelEventRequest);
     }
 
 

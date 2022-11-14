@@ -1,4 +1,4 @@
-package com.ssg.shoppingserver.domain.user.dto;
+package com.ssg.shoppingserver.domain.user.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
