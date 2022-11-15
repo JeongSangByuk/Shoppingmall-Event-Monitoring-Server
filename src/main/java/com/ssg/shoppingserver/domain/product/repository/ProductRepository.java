@@ -4,6 +4,8 @@ import com.ssg.shoppingserver.domain.product.domain.Product;
 import com.ssg.shoppingserver.domain.product.domain.ProductCategory;
 import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -21,6 +23,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Repository
+@Slf4j
 public class ProductRepository {
 
     @Getter
@@ -53,7 +56,6 @@ public class ProductRepository {
             Product product = Product.builder()
                     .id(UUID.fromString((String) mockProduct.get("id")))
                     .name((String) mockProduct.get("name"))
-                    .quantity((Long) mockProduct.get("quantity"))
                     .price((Long) mockProduct.get("price"))
                     .productCategory(ProductCategory.findByCode((Long) mockProduct.get("productCategory")))
                     .createdAt(LocalDateTime.parse((String) mockProduct.get("createdAt"), BaseLocalDateTimeFormatter.getLocalTimeFormatter())).build();

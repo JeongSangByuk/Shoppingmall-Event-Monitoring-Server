@@ -36,7 +36,6 @@ public class ProductInfoGetResponse {
     public ProductInfoGetResponse(Product product) {
         this.id = product.getId();
         this.name = product.getName();
-        this.quantity = product.getQuantity();
         this.price = product.getPrice();
         this.productCategory = product.getProductCategory();
         this.createdAt = product.getCreatedAt().format(BaseLocalDateTimeFormatter.getLocalTimeFormatter());

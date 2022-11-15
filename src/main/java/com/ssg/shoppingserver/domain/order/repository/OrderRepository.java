@@ -3,6 +3,7 @@ package com.ssg.shoppingserver.domain.order.repository;
 import com.ssg.shoppingserver.domain.order.domain.*;
 import com.ssg.shoppingserver.global.common.BaseLocalDateTimeFormatter;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -20,6 +21,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Repository
+@Slf4j
 public class OrderRepository {
 
     @Getter
@@ -27,12 +29,13 @@ public class OrderRepository {
     private Queue<Order> orders = new ConcurrentLinkedQueue<Order>();
 
     @Getter
+    // Cart Order 메모리 보관 queue
+    private Queue<CartOrder> cartOrders = new ConcurrentLinkedQueue<CartOrder>();
+
+    @Getter
     // Canceled Order 메모리 보관 queue
     private Queue<CanceledOrder> canceledOrders = new ConcurrentLinkedQueue<CanceledOrder>();
 
-    @Getter
-    // Cart Order 메모리 보관 queue
-    private Queue<CartOrder> cartOrders = new ConcurrentLinkedQueue<CartOrder>();
 
     @PostConstruct
     private void init() throws IOException, ParseException {

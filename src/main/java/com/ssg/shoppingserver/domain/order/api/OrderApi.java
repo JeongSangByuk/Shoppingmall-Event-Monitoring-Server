@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
-@RestController()
+@RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class OrderApi {
@@ -45,8 +45,5 @@ public class OrderApi {
     public OrderCancelEventResponse cancelOrder(@RequestBody @Valid OrderCancelEventRequest orderCancelEventRequest) {
         return orderService.cancelOrder(orderCancelEventRequest);
     }
-
-
-
 
 }

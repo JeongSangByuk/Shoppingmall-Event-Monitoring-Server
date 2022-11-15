@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CanceledOrder extends Order {
+public class CanceledOrder extends Order{
 
     /*
     주문 취소와 같은 경우는, '주문하기' 이벤트만큼 크리티컬한 이벤트라고 생각합니다.

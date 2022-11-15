@@ -22,9 +22,6 @@ public class Product extends BaseEntity {
     // Product 이름
     private String name;
 
-    // Product 수량
-    private Long quantity;
-
     // Product 가격
     private Long price;
 
@@ -32,11 +29,10 @@ public class Product extends BaseEntity {
     private ProductCategory productCategory;
 
 //    @Builder
-    public Product(UUID id, String name, Long quantity, Long price, ProductCategory productCategory, LocalDateTime createdAt) {
+    public Product(UUID id, String name, Long price, ProductCategory productCategory, LocalDateTime createdAt) {
         super(createdAt);
         this.id = id;
         this.name = name;
-        this.quantity = quantity;
         this.price = price;
         this.productCategory = productCategory;
     }

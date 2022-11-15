@@ -68,12 +68,12 @@ public class OrderService {
     // get total orders
     public List<OrderInfoGetResponse> getTotalOrders() {
 
-        List<OrderInfoGetResponse> orderInfoGetRespons = orderRepository.getOrders().stream()
+        List<OrderInfoGetResponse> orderInfoGetResponse = orderRepository.getOrders().stream()
                 .map(order -> OrderInfoGetResponse.builder()
                         .order(order).build())
                 .collect(Collectors.toList());
 
-        return orderInfoGetRespons;
+        return orderInfoGetResponse;
     }
 
     // get total orders
